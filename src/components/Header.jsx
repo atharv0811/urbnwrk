@@ -23,7 +23,8 @@ const Header = () => {
                     alt="Logo"
                 />
                 <div
-                    className={`collapse navbar-collapse ms-5`}
+                    className={`collapse navbar-collapse`}
+                    style={{ marginLeft: "5rem" }}
                     id="navbarTogglerDemo02"
                 >
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -42,7 +43,7 @@ const Header = () => {
                             <li>
                                 <div className="dropdown">
                                     <button
-                                        className="dropdown-toggle"
+                                        className="dropdown-toggle text-20 fw-normal"
                                         type="button"
                                         id="dropdownMenuButton"
                                     >

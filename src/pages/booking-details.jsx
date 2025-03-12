@@ -123,7 +123,7 @@ const BookingDetails = () => {
                         item.yearChange ? (
                             <div key={index} className="timeline-item year-change">
                                 <div className="timeline-icon year-icon"></div>
-                                <div className="timeline-content text-danger fw-bold fst-italic">
+                                <div className="timeline-content text-danger fst-italic">
                                     {item.text}
                                 </div>
                             </div>

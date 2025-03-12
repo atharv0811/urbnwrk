@@ -37,23 +37,19 @@ const eventDetails = [
         label: "Feedback",
         value: "",
     },
-    {
-        label: "Description",
-        value: "dlkfsajlkdahksdlsdafk",
-    },
 ];
 
 const EventDetails = () => {
     return (
         <>
-            <span className="text-secondary">
+            <span className="text-secondary text-18 fw-medium">
                 <Link to="/events" className="text-decoration-none text-secondary">
                     Event List
                 </Link>{" "}
                 {">"} Event Details
             </span>
 
-            <h5 className="my-2 text-red fw-semibold">Event Details</h5>
+            <h5 className="my-2 text-red fw-semibold text-26">Event Details</h5>
 
             <div className="card bg-card card-shadow my-4 p-3">
                 <span className="fw-medium">EVENT DETAILS</span>
@@ -77,6 +73,15 @@ const EventDetails = () => {
                         </div>
                     ))}
                 </div>
+            </div>
+
+            <div className="card card-shadow bg-card p-3 my-4">
+                <span className="fw-medium">DESCRIPTION</span>
+                <span className="divider-horizontal"></span>
+
+                <p className="text-18 fw-normal">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda nihil in laboriosam. Quos labore velit vero? Aliquam, incidunt laudantium.
+                </p>
             </div>
 
             <div className="card card-shadow bg-card p-3">

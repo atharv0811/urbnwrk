@@ -1,5 +1,5 @@
 import { Pen, Printer } from "lucide-react";
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const broadcastDetails = [
@@ -14,17 +14,37 @@ const broadcastDetails = [
     {
         label: "End Date & Time",
         value: "30/09/2024 - 12:00 PM",
-    },
-    {
-        label: "Description",
-        value: "Testing",
-    },
+    }
+];
+
+const statusOptions = [
+    { value: "Published", label: "Publish", color: "green" },
+    { value: "Expired", label: "Expire", color: "red" },
+    { value: "Disabled", label: "Disable", color: "gray" },
 ];
 
 const BroadcastDetails = () => {
+    const [selectedStatus, setSelectedStatus] = useState("Published");
+
+    const handleStatusChange = (status) => {
+        setSelectedStatus(status);
+    };
+
+    const statusBgColors = {
+        Published: "#3A8E5C",
+        Expired: "#B71C1C",
+        Disabled: "#D5DBDB"
+    };
+
+    const statusTextColors = {
+        Published: "white",
+        Expired: "white",
+        Disabled: "black"
+    };
+
     return (
         <>
-            <span className="text-secondary">
+            <span className="text-secondary text-18 fw-medium">
                 <Link to="/events" className="text-decoration-none text-secondary">
                     Broadcast List
                 </Link>{" "}
@@ -32,21 +52,43 @@ const BroadcastDetails = () => {
             </span>
 
             <div className="d-flex align-items-center justify-content-between">
-                <h5 className="my-2 text-red fw-semibold">Broadcast Details</h5>
-                <button className="btn-red fw-light" style={{ padding: "4px 18px" }}>
-                    <Printer size={15} /> Print
+                <h5 className="my-2 text-red fw-semibold text-26">Broadcast Details</h5>
+                <button className="btn-red fw-normal" style={{ padding: "8px 30px" }}>
+                    <Printer size={18} /> Print
                 </button>
             </div>
 
             <div className="card bg-card card-shadow my-4 p-3">
-                <span className="fw-medium">BROADCAST DETAILS</span>
-                <span className="divider-horizontal"></span>
-
-                <div className="mb-3 d-flex align-items-center gap-2">
+                <div className="mb-3 d-flex align-items-center gap-3">
                     <span className="fw-semibold">Status Type</span>{" "}
-                    <span className="d-flex align-items-center gap-2">
-                        : Published <Pen size={15} style={{ cursor: "pointer" }} />
-                    </span>
+                    <div className="dropdown">
+                        <button
+                            className="btn dropdown-toggle status-dropdown rounded-0"
+                            type="button"
+                            id={`dropdownMenuButton`}
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            style={{
+                                backgroundColor: statusBgColors[selectedStatus],
+                                color: statusTextColors[selectedStatus],
+                            }}
+                        >
+                            {selectedStatus}
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton`}>
+                            {statusOptions.map((option) => (
+                                <li key={option.value}>
+                                    <button
+                                        className="dropdown-item"
+                                        onClick={() => handleStatusChange(option.value)}
+                                        style={{ color: option.color }}
+                                    >
+                                        {option.label}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
                 <div className="row px-3">
                     {broadcastDetails.map((data, idx) => (
@@ -69,11 +111,20 @@ const BroadcastDetails = () => {
             </div>
 
             <div className="card card-shadow bg-card p-3 my-4">
+                <span className="fw-medium">DESCRIPTION</span>
+                <span className="divider-horizontal"></span>
+
+                <p className="text-18 fw-normal">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda nihil in laboriosam. Quos labore velit vero? Aliquam, incidunt laudantium.
+                </p>
+            </div>
+
+            <div className="card card-shadow bg-card p-3 my-4">
                 <span className="fw-medium">ATTACHMENTS</span>
                 <span className="divider-horizontal"></span>
 
                 <div>
-                    <img src="/image.png" alt="" className="rounded-2" />
+                    <img src="/logo.jpg" alt="" className="rounded-2" />
                 </div>
             </div>
 
@@ -93,7 +144,7 @@ const BroadcastDetails = () => {
                 <span className="divider-horizontal"></span>
 
                 <div className="table-responsive">
-                    <table className="text-start custom-table w-100">
+                    <table className="text-end custom-table w-100">
                         <thead className="text-nowrap">
                             <tr>
                                 <th>

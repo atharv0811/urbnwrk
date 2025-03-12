@@ -1,4 +1,4 @@
-import { CircleChevronDownIcon, Download, Edit, File } from "lucide-react";
+import { CircleChevronDownIcon, Download, Edit, File, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -58,14 +58,14 @@ const UserDetails = () => {
 
     return (
         <>
-            <span className="text-secondary">
+            <span className="text-secondary text-18 fw-medium">
                 <Link to="/user" className="text-decoration-none text-secondary">
                     My User
                 </Link>{" "}
                 {">"} My User details
             </span>
 
-            <h5 className="my-2 text-red fw-semibold">MY USERS DETAILS</h5>
+            <h5 className="my-2 text-red fw-semibold text-26">MY USERS DETAILS</h5>
 
             <div
                 className="card card-shadow bg-card my-4 position-relative"
@@ -334,24 +334,24 @@ const UserDetails = () => {
                     </form>
                 </div>
 
-                <div className="mt-5 d-flex align-items-center justify-content-between">
-                    <h5 className="text-red">TRANSACTION HISTORY</h5>
+                <div className="mt-4 d-flex align-items-center justify-content-between">
+                    <span className="text-red text-20 fw-semibold">TRANSACTION HISTORY</span>
                     <div className="d-flex align-items-center gap-2">
-                        <button className="btn-red" style={{ padding: "4px 6px" }}>
+                        <button className="btn-red" style={{ padding: "8px 10px" }}>
                             <Download size={20} />
                         </button>
                         <button
-                            className="btn-red fw-light"
-                            style={{ padding: "4px 20px" }}
+                            className="btn-red fw-normal d-flex align-items-center gap-2"
+                            style={{ padding: "8px 30px" }}
                         >
-                            + Filter
+                            <SlidersHorizontal size={15} className="my-1 my-lg-0" /> <span className="d-none d-lg-block">Filter</span>
                         </button>
                     </div>
                 </div>
 
                 <div className="table-responsive custom-table-container my-3">
-                    <table className="text-start custom-table w-100">
-                        <thead className="text-nowrap">
+                    <table className="text-end custom-table w-100">
+                        <thead className="text-nowrap text-center">
                             <tr>
                                 <th>Transaction ID</th>
                                 <th>Date</th>
@@ -386,7 +386,7 @@ const UserDetails = () => {
                         item.yearChange ? (
                             <div key={index} className="timeline-item year-change">
                                 <div className="timeline-icon year-icon"></div>
-                                <div className="timeline-content text-danger fw-bold fst-italic">
+                                <div className="timeline-content text-danger fst-italic">
                                     {item.text}
                                 </div>
                             </div>

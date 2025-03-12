@@ -7,7 +7,7 @@ const tableData = [
         name: "Abdul G",
         email: "abdul@email.com",
         mobileNo: "1234567890",
-        stauts: "Rejected",
+        status: "Rejected",
         userId: "17736",
         userType: "Admin",
         createdDate: "09/11/24",
@@ -17,7 +17,7 @@ const tableData = [
         name: "Abdul G",
         email: "abdul@email.com",
         mobileNo: "1234567890",
-        stauts: "Accepted",
+        status: "Approved",
         userId: "17736",
         userType: "Admin",
         createdDate: "09/11/24",
@@ -27,7 +27,7 @@ const tableData = [
         name: "Abdul G",
         email: "abdul@email.com",
         mobileNo: "1234567890",
-        stauts: "Rejected",
+        status: "Rejected",
         userId: "17736",
         userType: "Admin",
         createdDate: "09/11/24",
@@ -37,7 +37,7 @@ const tableData = [
         name: "Abdul G",
         email: "abdul@email.com",
         mobileNo: "1234567890",
-        stauts: "Pending",
+        status: "Pending",
         userId: "17736",
         userType: "Admin",
         createdDate: "09/11/24",
@@ -46,7 +46,7 @@ const tableData = [
 ];
 
 const statusOptions = [
-    { value: "Accepted", label: "Accept", color: "green" },
+    { value: "Approved", label: "Approve", color: "green" },
     { value: "Rejected", label: "Reject", color: "red" },
 ];
 
@@ -54,46 +54,59 @@ const User = () => {
     const navigate = useNavigate();
 
     const [selectedStatus, setSelectedStatus] = useState({});
+    const [searchQuery, setSearchQuery] = useState("");
 
     const handleStatusChange = (index, status) => {
         setSelectedStatus((prev) => ({ ...prev, [index]: status }));
+    };
+
+    const statusBgColors = {
+        Approved: "#3A8E5C",
+        Rejected: "#B71C1C",
+        Pending: "#F9A825"
+    };
+
+    const statusTextColors = {
+        Approved: "white",
+        Rejected: "white",
+        Pending: "black"
     };
 
     return (
         <>
             <div className="row g-3">
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4">
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
-                            <strong className="text-red fs-4">250</strong>
-                            <span className="text-secondary">Total Users</span>
+                            <span className="text-red text-24 fw-semibold">250</span>
+                            <span className="text-secondary text-22 fw-medium">Total Users</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4">
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
-                            <strong className="text-red fs-4">30</strong>
-                            <span className="text-secondary">Pending</span>
+                            <strong className="text-red text-24 fw-semibold">30</strong>
+                            <span className="text-secondary text-22 fw-medium">Pending</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4">
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
-                            <strong className="text-red fs-4">22</strong>
-                            <span className="text-secondary">Approved</span>
+                            <strong className="text-red text-24 fw-semibold">22</strong>
+                            <span className="text-secondary text-22 fw-medium">Approved</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4">
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
-                            <strong className="text-red fs-4">10</strong>
-                            <span className="text-secondary">Rejected</span>
+                            <strong className="text-red text-24 fw-semibold">10</strong>
+                            <span className="text-secondary text-22 fw-medium">Rejected</span>
                         </div>
                     </div>
                 </div>
@@ -104,9 +117,11 @@ const User = () => {
                     <div className="position-relative">
                         <input
                             type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search"
                             className="form-control rounded-0 text-secondary"
-                            style={{ paddingLeft: "30px" }}
+                            style={{ padding: "8px 3px 8px 30px", width: "230px" }}
                         />
                         <Search
                             size={15}
@@ -114,17 +129,17 @@ const User = () => {
                             style={{ left: "10px" }}
                         />
                     </div>
-                    <button className="btn-red fw-light" style={{ padding: "6px 8px" }}>
+                    <button className="btn-red fw-light" style={{ padding: "8px 10px" }}>
                         Go !
                     </button>
                 </div>
-                <button className="btn-red fw-light" style={{ padding: "4px 18px" }}>
+                <button className="btn-red fw-light" style={{ padding: "8px 30px" }}>
                     + Filter
                 </button>
             </div>
 
             <div className="table-responsive">
-                <table className="text-start custom-table w-100">
+                <table className="text-end custom-table w-100">
                     <thead className="text-nowrap">
                         <tr>
                             <th>View</th>
@@ -139,8 +154,8 @@ const User = () => {
                         </tr>
                     </thead>
                     <tbody className="text-nowrap">
-                        {tableData.map((data, idx) => (
-                            <tr key={idx}>
+                        {tableData.map((data, index) => (
+                            <tr key={index}>
                                 <td>
                                     <Eye
                                         size={20}
@@ -156,25 +171,24 @@ const User = () => {
                                 <td>
                                     <div className="dropdown">
                                         <button
-                                            className="btn dropdown-toggle status-dropdown"
+                                            className="btn dropdown-toggle status-dropdown rounded-0"
                                             type="button"
-                                            id={`dropdownMenuButton${idx}`}
+                                            id={`dropdownMenuButton${index}`}
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
+                                            style={{
+                                                backgroundColor: statusBgColors[selectedStatus[index] || data.status],
+                                                color: statusTextColors[selectedStatus[index] || data.status],
+                                            }}
                                         >
-                                            {selectedStatus[idx] || data.stauts}
+                                            {selectedStatus[index] || data.status}
                                         </button>
-                                        <ul
-                                            className="dropdown-menu"
-                                            aria-labelledby={`dropdownMenuButton${idx}`}
-                                        >
+                                        <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton${index}`}>
                                             {statusOptions.map((option) => (
                                                 <li key={option.value}>
                                                     <button
                                                         className="dropdown-item"
-                                                        onClick={() =>
-                                                            handleStatusChange(idx, option.value)
-                                                        }
+                                                        onClick={() => handleStatusChange(index, option.value)}
                                                         style={{ color: option.color }}
                                                     >
                                                         {option.label}

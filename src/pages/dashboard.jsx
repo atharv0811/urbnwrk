@@ -103,6 +103,18 @@ const CustomLabel = ({ x, y, value }) => {
 };
 
 const Dashboard = () => {
+    const statusBgColors = {
+        Approved: "#3A8E5C",
+        Rejected: "#B71C1C",
+        Pending: "#F9A825"
+    };
+
+    const statusTextColors = {
+        Approved: "white",
+        Rejected: "white",
+        Pending: "black"
+    };
+
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
@@ -111,7 +123,7 @@ const Dashboard = () => {
     const [endDate, setEndDate] = useState(tomorrow);
     const [activeTab, setActiveTab] = useState("Pending");
     const [selectedStatus, setSelectedStatus] = useState({});
-    const [graphActiveTab, setGraphActiveTab] = useState("weekly")
+    const [graphActiveTab, setGraphActiveTab] = useState("weekly");
     const [greeting, setGreeting] = useState("");
 
     useEffect(() => {
@@ -129,18 +141,32 @@ const Dashboard = () => {
         setGreeting(getGreeting());
     }, []);
 
-    const graphData = graphActiveTab === "weekly" ? weeklyGraphData : monthlyGraphData
+    const graphData =
+        graphActiveTab === "weekly" ? weeklyGraphData : monthlyGraphData;
 
     const handleStatusChange = (index, status) => {
         setSelectedStatus((prev) => ({ ...prev, [index]: status }));
+    };
+
+    const RADIAN = Math.PI / 180;
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+        return (
+            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${(percent * 100).toFixed(0)}%`}
+            </text>
+        );
     };
 
     return (
         <>
             <div className="card dashboard-card1 d-flex justify-content-between flex-row">
                 <div>
-                    <h4 className="mb-3 fw-bold">{greeting} User!</h4>
-                    <i>
+                    <h4 className="mb-3 fw-bold text-26">{greeting} User!</h4>
+                    <i className="text-22">
                         “We are UrbanWrk. Where your vision and creativity find their shape
                         and reality. ”
                     </i>
@@ -152,33 +178,37 @@ const Dashboard = () => {
 
             <div className="d-flex flex-column flex-lg-row justify-content-between my-4 gap-4">
                 <div className="card dashboard-card2 d-flex flex-row align-items-center">
-                    <div className="d-flex flex-column align-items-center">
-                        <span className="fw-bold">30</span>
-                        <span>Oct</span>
+                    <div className="d-flex flex-column align-items-center text-24">
+                        <span className="fw-semibold">30</span>
+                        <span className="fw-normal">Oct</span>
                     </div>
                     <span className="divider"></span>
-                    <div className="d-flex flex-column align-items-start">
-                        <span className="fw-bold">Mock fire drill</span>
-                        <span className="text-secondary2">Expires On 31/10/2024</span>
+                    <div className="d-flex flex-column align-items-start text-20">
+                        <span className="fw-semibold">Mock fire drill</span>
+                        <span className="text-secondary2 fw-normal">
+                            Expires On 31/10/2024
+                        </span>
                     </div>
                 </div>
                 <div className="card dashboard-card2 d-flex flex-row align-items-center">
-                    <div className="d-flex flex-column align-items-center">
-                        <span className="fw-bold">30</span>
-                        <span>Oct</span>
+                    <div className="d-flex flex-column align-items-center text-24">
+                        <span className="fw-semibold">30</span>
+                        <span className="fw-normal">Oct</span>
                     </div>
                     <span className="divider"></span>
-                    <div className="d-flex flex-column align-items-start">
-                        <span className="fw-bold">Diwali Party</span>
-                        <span className="text-secondary2">Expires On 31/10/2024</span>
+                    <div className="d-flex flex-column align-items-start text-20">
+                        <span className="fw-semibold">Diwali Party</span>
+                        <span className="text-secondary2 fw-normal">
+                            Expires On 31/10/2024
+                        </span>
                     </div>
                 </div>
             </div>
 
             <div className="d-flex flex-column flex-xl-row justify-content-between my-4 gap-4">
-                <div className="card card-shadow p-3">
+                <div className="card card-shadow p-3" style={{ height: "470px" }}>
                     <div className="d-flex flex-row align-items-center justify-content-between">
-                        <span className="fw-medium">Tickets</span>
+                        <span className="fw-medium text-20">Tickets</span>
                         <div className="d-flex align-items-center gap-2">
                             <div className="position-relative">
                                 <Calendar className="calendar-icon" />
@@ -205,10 +235,10 @@ const Dashboard = () => {
                                     className="form-control date-input rounded-0"
                                 />
                             </div>
-                            <button className="btn-red" style={{ padding: "4px 6px" }}>
+                            <button className="btn-red" style={{ padding: "7px 10px" }}>
                                 <ArrowUp size={20} />
                             </button>
-                            <button className="btn-red" style={{ padding: "4px 6px" }}>
+                            <button className="btn-red" style={{ padding: "7px 10px" }}>
                                 <Download size={20} />
                             </button>
                         </div>
@@ -217,15 +247,16 @@ const Dashboard = () => {
                     <span className="divider-horizontal"></span>
 
                     <div className="chart-container">
-                        <PieChart width={250} height={250}>
+                        <PieChart width={315} height={315}>
                             <Pie
                                 data={data}
                                 cx="50%"
                                 cy="50%"
-                                innerRadius={0}
-                                outerRadius={100}
+                                label={renderCustomizedLabel}
+                                outerRadius={150}
                                 dataKey="value"
-                                label={({ value }) => value}
+                                labelLine={false}
+                                isAnimationActive={true}
                             >
                                 {data.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={entry.color} />
@@ -236,17 +267,20 @@ const Dashboard = () => {
                         <CustomLegend />
                     </div>
                 </div>
-                <div className="card card-shadow p-3">
-                    <span className="fw-medium">My Users</span>
-                    <span className="divider-horizontal"></span>
+                <div className="card card-shadow p-3" style={{ height: "470px" }}>
+                    <div className="fw-medium text-20 my-1">My Users</div>
+                    <span className="divider-horizontal mb-0"></span>
 
-                    <div className="d-flex align-items-center justify-content-between gap-3 mb-3">
+                    <div
+                        className="d-flex align-items-center justify-content-between gap-3"
+                        style={{ margin: "25px 0" }}
+                    >
                         {["Pending", "Rejected", "Accepted"].map((tab) => (
                             <button
                                 key={tab}
                                 className={`${activeTab === tab ? "btn-red" : "btn rounded-0"
-                                    } px-2 w-100`}
-                                style={{ fontSize: "15px", height: "40px" }}
+                                    } px-2 w-100 fw-semibold`}
+                                style={{ fontSize: "16px", height: "50px" }}
                                 onClick={() => setActiveTab(tab)}
                             >
                                 {tab} Users : {userData[tab].length}
@@ -271,25 +305,24 @@ const Dashboard = () => {
                                         <td>
                                             <div className="dropdown">
                                                 <button
-                                                    className="btn dropdown-toggle status-dropdown"
+                                                    className="btn dropdown-toggle status-dropdown rounded-0"
                                                     type="button"
                                                     id={`dropdownMenuButton${index}`}
                                                     data-bs-toggle="dropdown"
                                                     aria-expanded="false"
+                                                    style={{
+                                                        backgroundColor: statusBgColors[selectedStatus[index] || user.status],
+                                                        color: statusTextColors[selectedStatus[index] || user.status],
+                                                    }}
                                                 >
                                                     {selectedStatus[index] || user.status}
                                                 </button>
-                                                <ul
-                                                    className="dropdown-menu"
-                                                    aria-labelledby={`dropdownMenuButton${index}`}
-                                                >
+                                                <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton${index}`}>
                                                     {statusOptions.map((option) => (
                                                         <li key={option.value}>
                                                             <button
                                                                 className="dropdown-item"
-                                                                onClick={() =>
-                                                                    handleStatusChange(index, option.value)
-                                                                }
+                                                                onClick={() => handleStatusChange(index, option.value)}
                                                                 style={{ color: option.color }}
                                                             >
                                                                 {option.label}
@@ -308,82 +341,108 @@ const Dashboard = () => {
             </div>
 
             <div className="d-flex flex-column flex-xl-row my-4 gap-4">
-                <div className="card card-shadow p-3 wallet-card">
-                    <span className="fw-medium">Wallet</span>
+                <div
+                    className="card card-shadow p-3 wallet-card"
+                    style={{ height: "242px", width: "378px" }}
+                >
+                    <span className="fw-medium text-20">Wallet</span>
                     <span className="divider-horizontal"></span>
 
-                    <div className="card bg-card p-3 d-flex flex-column gap-2">
-                        <span className="text-red">
-                            <Wallet size={15} /> <span className="fw-semibold">15000</span>{" "}
+                    <div
+                        className="card bg-card d-flex flex-column justify-content-center gap-2"
+                        style={{ height: "150px" }}
+                    >
+                        <span className="text-red text-24">
+                            <Wallet size={18} /> <span className="fw-semibold">15000</span>{" "}
                             INR
                         </span>
-                        <span className="fw-semibold">Available Balance</span>
+                        <span className="fw-medium text-20">Available Balance</span>
                     </div>
                 </div>
-                <div className="card card-shadow p-3">
+                <div className="card card-shadow p-3" style={{ height: "242px" }}>
                     <div className="d-flex align-items-center justify-content-between">
-                        <span className="fw-medium">Financial Salary</span>
-                        <button className="btn-red" style={{ padding: "4px 6px" }}>
-                            <Download size={20} />
+                        <span className="fw-medium text-20">Financial Summary</span>
+                        <button className="btn-red" style={{ padding: "2px 6px" }}>
+                            <Download size={16} />
                         </button>
                     </div>
                     <span className="divider-horizontal"></span>
 
                     <div className="d-flex align-items-center gap-2">
-                        <div className="card bg-card p-3 d-flex flex-column gap-2">
-                            <span className="text-red">
+                        <div
+                            className="card bg-card d-flex flex-column justify-content-center gap-2"
+                            style={{ height: "150px", padding: "33px 0 33px 46px" }}
+                        >
+                            <span className="text-red text-24">
                                 <span className="fw-semibold"> - 6000</span> INR
                             </span>
-                            <span className="fw-semibold">Booked Amount</span>
+                            <span className="fw-medium text-20">Booked Amount</span>
                         </div>
-                        <div className="card bg-card p-3 d-flex flex-column gap-2">
-                            <span className="text-success">
+                        <div
+                            className="card bg-card  d-flex flex-column justify-content-center gap-2"
+                            style={{ height: "150px", padding: "33px 0 33px 46px" }}
+                        >
+                            <span className="text-success text-24">
                                 <span className="fw-semibold"> + 15000</span> INR
                             </span>
-                            <span className="fw-semibold">Refund Amount</span>
+                            <span className="fw-medium text-20">Refund Amount</span>
                         </div>
-                        <div className="card bg-card p-3 d-flex flex-column gap-2">
-                            <span className="text-secondary">
-                                <Clock size={15} /> <span className="fw-semibold">15000</span>{" "}
+                        <div
+                            className="card bg-card  d-flex flex-column justify-content-center gap-2"
+                            style={{ height: "150px", padding: "33px 0 33px 46px" }}
+                        >
+                            <span className="text-secondary text-24">
+                                <Clock size={18} /> <span className="fw-semibold">15000</span>{" "}
                                 INR
                             </span>
-                            <span className="fw-semibold">Pending Refund Amount</span>
+                            <span className="fw-medium text-20">Pending Refund Amount</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="card card-shadow p-3">
-                <span className="fw-medium">Meeting Room Expenses</span>
+            <div className="card card-shadow px-3 pt-3 pb-4">
+                <span className="fw-medium text-20">Meeting Room Expenses</span>
                 <span className="divider-horizontal"></span>
 
                 <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center gap-2">
-                        <button className={`${graphActiveTab === 'weekly' ? 'btn-red' : 'btn rounded-0'}`} style={{ padding: "4px 18px" }} onClick={() => setGraphActiveTab("weekly")}>
+                        <button
+                            className={`${graphActiveTab === "weekly" ? "btn-red" : "btn rounded-0"
+                                } fw-semibold`}
+                            style={{ padding: "4px 18px", height: "50px", width: "150px" }}
+                            onClick={() => setGraphActiveTab("weekly")}
+                        >
                             Weekly
                         </button>
-                        <button className={`${graphActiveTab === 'monthly' ? 'btn-red' : 'btn rounded-0'}`} style={{ padding: "4px 18px" }} onClick={() => setGraphActiveTab("monthly")}>
+                        <button
+                            className={`${graphActiveTab === "monthly" ? "btn-red" : "btn rounded-0"
+                                } fw-semibold`}
+                            style={{ padding: "4px 18px", height: "50px", width: "150px" }}
+                            onClick={() => setGraphActiveTab("monthly")}
+                        >
                             Monthly
                         </button>
                     </div>
-                    <button className="btn-red" style={{ padding: "4px 6px" }}>
+                    <button className="btn-red" style={{ padding: "7px 10px" }}>
                         <Download size={20} />
                     </button>
                 </div>
 
-                <ResponsiveContainer width="90%" height={350} className="my-3 mx-auto">
+                <ResponsiveContainer width="90%" height={380} className="my-3 mx-auto">
                     <LineChart
                         data={graphData}
                         margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis
-                            dataKey={graphActiveTab === 'weekly' ? "day" : "name"}
+                            dataKey={graphActiveTab === "weekly" ? "day" : "name"}
                             label={{
                                 value: "Meeting Expenses over Time",
                                 position: "bottom",
                                 offset: 10,
-                                fontSize: 14,
+                                fontSize: 20,
+                                fontStyle: "italic",
                             }}
                         />
                         <YAxis
@@ -391,7 +450,8 @@ const Dashboard = () => {
                                 value: "Amount",
                                 angle: -90,
                                 position: "left",
-                                fontSize: 14,
+                                fontSize: 20,
+                                fontStyle: "italic",
                             }}
                         />
                         <Tooltip />

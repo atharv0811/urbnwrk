@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react";
+import { Calendar, InfoIcon } from "lucide-react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,14 +32,14 @@ const AddEvent = () => {
 
     return (
         <>
-            <span className="text-secondary">
+            <span className="text-secondary text-18 fw-medium">
                 <Link to="/events" className="text-decoration-none text-secondary">
                     Event List
                 </Link>{" "}
                 {">"} New Event
             </span>
 
-            <h5 className="my-2 text-red fw-semibold">New Event</h5>
+            <h5 className="my-2 text-red fw-semibold text-26">NEW EVENT</h5>
 
             <form>
                 <div className="card card-shadow bg-card p-3 my-4">
@@ -277,9 +277,14 @@ const AddEvent = () => {
                             type="file"
                             id="fileUpload"
                             onChange={handleFileChange}
-                            multiple
                         />
                         <label htmlFor="fileUpload">{fileNames}</label>
+                        <InfoIcon
+                            className="cursor-pointer text-red"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Allowed file types: JPG, PNG, PDF. Max size: 5MB."
+                        />
                     </div>
                 </div>
 
@@ -288,7 +293,7 @@ const AddEvent = () => {
                         Create Event
                     </button>
                     <button
-                        className="btn-red px-4 py-2"
+                        className="rounded-0 fw-normal text-red bg-transparent border-red px-4 py-2"
                         type="button"
                         onClick={() => navigate(-1)}
                     >

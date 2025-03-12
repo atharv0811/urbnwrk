@@ -1,13 +1,14 @@
-import { Calendar } from "lucide-react"
-import { useState } from "react"
-import DatePicker from "react-datepicker"
-import { Link, useNavigate } from "react-router-dom"
+import { Calendar, InfoIcon } from "lucide-react";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import { Link, useNavigate } from "react-router-dom";
 
 const AddBroadcast = () => {
     const navigate = useNavigate();
     const [endDate, setEndDate] = useState();
     const [fileNames, setFileNames] = useState("No file chosen");
     const [selectedOption, setSelectedOption] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -23,14 +24,14 @@ const AddBroadcast = () => {
 
     return (
         <>
-            <span className="text-secondary">
+            <span className="text-secondary text-18 fw-medium">
                 <Link to="/broadcast" className="text-decoration-none text-secondary">
                     Broadcast List
                 </Link>{" "}
                 {">"} New Broadcast
             </span>
 
-            <h5 className="my-2 text-red fw-semibold">NEW BROADCAST</h5>
+            <h5 className="my-2 text-red fw-semibold text-26">NEW BROADCAST</h5>
 
             <form>
                 <div className="card card-shadow bg-card p-3 my-4">
@@ -118,16 +119,16 @@ const AddBroadcast = () => {
                     <span className="divider-horizontal"></span>
 
                     <div className="custom-file-input">
-                        <input
-                            type="file"
-                            id="fileUpload"
-                            onChange={handleFileChange}
-                            multiple
-                        />
+                        <input type="file" id="fileUpload" onChange={handleFileChange} />
                         <label htmlFor="fileUpload">{fileNames}</label>
+                        <InfoIcon
+                            className="cursor-pointer text-red"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Allowed file types: JPG, PNG, PDF. Max size: 5MB."
+                        />
                     </div>
                 </div>
-
 
                 <div className="card card-shadow bg-card p-3 my-4">
                     <span className="fw-medium">SHARE WITH</span>
@@ -180,11 +181,11 @@ const AddBroadcast = () => {
                 </div>
 
                 <div className="d-flex align-items-center justify-content-center gap-2">
-                    <button className="btn-red px-4 py-2" type="submit">
+                    <button className="btn-red px-4 py-2 fw-normal" type="submit">
                         Create Broadcast
                     </button>
                     <button
-                        className="btn-red px-4 py-2"
+                        className="px-4 py-2 rounded-0 fw-normal text-red bg-transparent border-red"
                         type="button"
                         onClick={() => navigate(-1)}
                     >
@@ -193,7 +194,7 @@ const AddBroadcast = () => {
                 </div>
             </form>
         </>
-    )
-}
+    );
+};
 
-export default AddBroadcast
+export default AddBroadcast;
