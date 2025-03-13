@@ -176,7 +176,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="d-flex flex-column flex-lg-row justify-content-between my-4 gap-4">
+            <div className="d-flex flex-column flex-lg-row justify-content-between my-4" style={{ gap: "2.2rem" }}>
                 <div className="card dashboard-card2 d-flex flex-row align-items-center">
                     <div className="d-flex flex-column align-items-center text-24">
                         <span className="fw-semibold">30</span>
@@ -205,7 +205,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="d-flex flex-column flex-xl-row justify-content-between my-4 gap-4">
+            <div className="d-flex flex-column flex-xl-row justify-content-between my-4" style={{ gap: "2.2rem" }}>
                 <div className="card card-shadow p-3" style={{ height: "470px" }}>
                     <div className="d-flex flex-row align-items-center justify-content-between">
                         <span className="fw-medium text-20">Tickets</span>
@@ -340,7 +340,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="d-flex flex-column flex-xl-row my-4 gap-4">
+            <div className="d-flex flex-column flex-xl-row my-4" style={{ gap: "2.2rem" }} >
                 <div
                     className="card card-shadow p-3 wallet-card"
                     style={{ height: "242px", width: "378px" }}
