@@ -211,7 +211,7 @@ const Dashboard = () => {
                         <span className="fw-medium text-20">Tickets</span>
                         <div className="d-flex align-items-center gap-2">
                             <div className="position-relative">
-                                <Calendar className="calendar-icon" />
+                                <Calendar className="calendar-icon" color="#c72030" />
                                 <DatePicker
                                     selected={startDate}
                                     onChange={(date) => setStartDate(date)}
@@ -224,7 +224,7 @@ const Dashboard = () => {
                             </div>
                             <span className="to">TO</span>
                             <div className="position-relative">
-                                <Calendar className="calendar-icon" />
+                                <Calendar className="calendar-icon" color="#c72030" />
                                 <DatePicker
                                     selected={endDate}
                                     onChange={(date) => setEndDate(date)}
@@ -294,7 +294,7 @@ const Dashboard = () => {
                                 <tr>
                                     <th>Name</th>
                                     <th>E-mail ID</th>
-                                    <th>Status</th>
+                                    <th style={{ width: "200px" }}>Status</th>
                                 </tr>
                             </thead>
                             <tbody className="text-nowrap">
