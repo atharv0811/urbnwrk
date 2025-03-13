@@ -308,7 +308,7 @@ const Dashboard = () => {
                                 <tr>
                                     <th style={{ width: "150px" }}>Name</th>
                                     <th>E-mail ID</th>
-                                    <th style={{ width: "200px" }}>Status</th>
+                                    <th style={{ width: "150px" }}>Status</th>
                                 </tr>
                             </thead>
                             <tbody className="text-nowrap">
