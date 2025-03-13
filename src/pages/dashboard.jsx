@@ -13,6 +13,7 @@ import {
     XAxis,
     YAxis,
     Line,
+    LabelList,
 } from "recharts";
 
 const weeklyGraphData = [
@@ -101,20 +102,6 @@ const CustomLegend = () => (
         </div>
     </div>
 );
-
-const CustomLabel = ({ x, y, value }) => {
-    return (
-        <text
-            x={x}
-            y={y}
-            fill={value >= 0 ? "green" : "red"}
-            fontSize={14}
-            textAnchor="middle"
-        >
-            {value >= 0 ? `↑ ${value}` : `↓ ${Math.abs(value)}`}
-        </text>
-    );
-};
 
 const Dashboard = () => {
     const statusBgColors = {
@@ -443,7 +430,7 @@ const Dashboard = () => {
                     </button>
                 </div>
 
-                <ResponsiveContainer width="90%" height={400} className="my-3 mx-auto">
+                <ResponsiveContainer width="90%" height={450} className="my-3 mx-auto">
                     <LineChart
                         data={graphData}
                         margin={{ top: 20, right: 20, left: 40, bottom: 50 }}
@@ -476,15 +463,26 @@ const Dashboard = () => {
                             stroke="#C4B79A"
                             strokeWidth={2}
                             dot={{ fill: "#C4B79A", r: 5 }}
-                        />
-                        {graphData.map((entry, index) => (
-                            <CustomLabel
-                                key={index}
-                                x={index * 60 + 50}
-                                y={entry.amount / 15}
-                                value={entry.change}
+                        >
+                            <LabelList
+                                dataKey="change"
+                                position="top"
+                                content={({ x, y, value, index }) =>
+                                    index !== 0 && (
+                                        <text
+                                            x={x}
+                                            y={value >= 0 ? y - 20 : y + 30}
+                                            fill={value >= 0 ? "green" : "red"}
+                                            fontSize={18}
+                                            fontWeight={500}
+                                            textAnchor="middle"
+                                        >
+                                            {value >= 0 ? `↑ ${value}` : `↓ ${Math.abs(value)}`}
+                                        </text>
+                                    )
+                                }
                             />
-                        ))}
+                        </Line>
                     </LineChart>
                 </ResponsiveContainer>
             </div>

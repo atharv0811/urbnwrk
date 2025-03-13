@@ -376,8 +376,8 @@ select,
 }
 
 .recharts-responsive-container .recharts-wrapper {
-  height: 400px !important;
-  max-height: 400px !important;
+  height: 500px !important;
+  max-height: 500px !important;
 }
 
 .custom-legend {
