@@ -155,14 +155,14 @@ const Events = () => {
                             className="btn-red fw-normal d-flex align-items-center gap-2"
                             style={{ padding: "8px 30px" }}
                         >
-                            + <span className="d-none d-lg-block">Add</span>
+                            + <span className="d-none d-lg-block text-white">Add</span>
                         </button>
                     </Link>
                     <button
                         className="btn-red fw-normal d-flex align-items-center gap-2"
                         style={{ padding: "8px 30px" }}
                     >
-                        <SlidersHorizontal size={15} className="my-1 my-lg-0" /> <span className="d-none d-lg-block">Filter</span>
+                        <SlidersHorizontal size={15} color="#fff" className="my-1 my-lg-0" /> <span className="d-none d-lg-block text-white">Filter</span>
                     </button>
                 </div>
             </div>
@@ -186,7 +186,7 @@ const Events = () => {
                         {
                             tableData.map((data, index) => (
                                 <tr key={index}>
-                                    <td>
+                                    <td className="text-center">
                                         <Eye size={20} style={{ cursor: "pointer" }} onClick={
                                             () => navigate(`/events/${index}`)
                                         } />

@@ -74,7 +74,7 @@ const Bookings = () => {
             <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3">
                 <div
                     className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between"
-                    style={{ height: "160px", padding: "25px 50px" }}
+                    style={{ height: "160px", padding: "30px 50px", gap: "10px" }}
                 >
                     <div className="d-flex flex-column gap-2 w-50">
                         <strong className="text-red text-24 fw-semibold">10,000</strong>
@@ -90,8 +90,8 @@ const Bookings = () => {
                     </div>
                 </div>
                 <div
-                    className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between gap-3"
-                    style={{ height: "160px", padding: "25px 50px" }}
+                    className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between"
+                    style={{ height: "160px", padding: "30px 50px", gap: "10px" }}
                 >
                     <div className="d-flex flex-column gap-2 w-50">
                         <strong className="text-red text-24 fw-semibold">10,000</strong>
@@ -107,8 +107,8 @@ const Bookings = () => {
                     </div>
                 </div>
                 <div
-                    className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between gap-3"
-                    style={{ height: "160px", padding: "25px 50px" }}
+                    className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between"
+                    style={{ height: "160px", padding: "30px 50px", gap: "10px" }}
                 >
                     <div className="d-flex flex-column gap-2 w-50">
                         <strong className="text-red text-24 fw-semibold">10,000</strong>
@@ -169,7 +169,7 @@ const Bookings = () => {
                     <tbody className="text-nowrap">
                         {tableData.map((data, idx) => (
                             <tr key={idx}>
-                                <td>
+                                <td className="text-center">
                                     <Eye
                                         size={20}
                                         style={{ cursor: "pointer" }}

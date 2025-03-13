@@ -185,7 +185,7 @@ const Dashboard = () => {
                     <span className="divider"></span>
                     <div className="d-flex flex-column align-items-start text-20">
                         <span className="fw-semibold">Mock fire drill</span>
-                        <span className="text-secondary2 fw-normal">
+                        <span className="fw-normal" style={{ color: "#C4B89D" }}>
                             Expires On 31/10/2024
                         </span>
                     </div>
@@ -198,7 +198,7 @@ const Dashboard = () => {
                     <span className="divider"></span>
                     <div className="d-flex flex-column align-items-start text-20">
                         <span className="fw-semibold">Diwali Party</span>
-                        <span className="text-secondary2 fw-normal">
+                        <span className="fw-normal" style={{ color: "#C4B89D" }}>
                             Expires On 31/10/2024
                         </span>
                     </div>
@@ -236,10 +236,10 @@ const Dashboard = () => {
                                 />
                             </div>
                             <button className="btn-red" style={{ padding: "7px 10px" }}>
-                                <ArrowUp size={20} />
+                                <ArrowUp size={20} color="#fff" />
                             </button>
                             <button className="btn-red" style={{ padding: "7px 10px" }}>
-                                <Download size={20} />
+                                <Download size={20} color="#fff" />
                             </button>
                         </div>
                     </div>
@@ -279,7 +279,7 @@ const Dashboard = () => {
                             <button
                                 key={tab}
                                 className={`${activeTab === tab ? "btn-red" : "btn rounded-0"
-                                    } px-2 w-100 fw-semibold`}
+                                    } px-2 w-100 fw-medium`}
                                 style={{ fontSize: "16px", height: "50px" }}
                                 onClick={() => setActiveTab(tab)}
                             >
@@ -353,7 +353,7 @@ const Dashboard = () => {
                         style={{ height: "150px" }}
                     >
                         <span className="text-red text-24">
-                            <Wallet size={18} /> <span className="fw-semibold">15000</span>{" "}
+                            <Wallet size={18} color="#c72030" /> <span className="fw-semibold text-red">15000</span>{" "}
                             INR
                         </span>
                         <span className="fw-medium text-20">Available Balance</span>
@@ -363,7 +363,7 @@ const Dashboard = () => {
                     <div className="d-flex align-items-center justify-content-between">
                         <span className="fw-medium text-20">Financial Summary</span>
                         <button className="btn-red" style={{ padding: "2px 6px" }}>
-                            <Download size={16} />
+                            <Download size={16} color="#fff" />
                         </button>
                     </div>
                     <span className="divider-horizontal"></span>
@@ -374,7 +374,7 @@ const Dashboard = () => {
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
                             <span className="text-red text-24">
-                                <span className="fw-semibold"> - 6000</span> INR
+                                <span className="fw-semibold text-red"> - 6000</span> INR
                             </span>
                             <span className="fw-medium text-20">Booked Amount</span>
                         </div>
@@ -383,7 +383,7 @@ const Dashboard = () => {
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
                             <span className="text-success text-24">
-                                <span className="fw-semibold"> + 15000</span> INR
+                                <span className="fw-semibold text-success"> + 15000</span> INR
                             </span>
                             <span className="fw-medium text-20">Refund Amount</span>
                         </div>
@@ -391,8 +391,8 @@ const Dashboard = () => {
                             className="card bg-card2  d-flex flex-column justify-content-center gap-2"
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
-                            <span className="text-secondary text-24 d-flex align-items-center gap-2">
-                                <img src="/pending-refund-amount.svg" alt="" /> <span className="fw-semibold">15000</span>{" "}
+                            <span className="text-secondary2 text-24 d-flex align-items-center gap-2">
+                                <img src="/pending-refund-amount.svg" alt="" /> <span className="fw-semibold text-secondary2">15000</span>{" "}
                                 INR
                             </span>
                             <span className="fw-medium text-20">Pending Refund Amount</span>
@@ -409,7 +409,7 @@ const Dashboard = () => {
                     <div className="d-flex align-items-center gap-2">
                         <button
                             className={`${graphActiveTab === "weekly" ? "btn-red" : "btn rounded-0"
-                                } fw-semibold`}
+                                } fw-medium`}
                             style={{ padding: "4px 18px", height: "50px", width: "150px" }}
                             onClick={() => setGraphActiveTab("weekly")}
                         >
@@ -417,7 +417,7 @@ const Dashboard = () => {
                         </button>
                         <button
                             className={`${graphActiveTab === "monthly" ? "btn-red" : "btn rounded-0"
-                                } fw-semibold`}
+                                } fw-medium`}
                             style={{ padding: "4px 18px", height: "50px", width: "150px" }}
                             onClick={() => setGraphActiveTab("monthly")}
                         >
@@ -425,14 +425,14 @@ const Dashboard = () => {
                         </button>
                     </div>
                     <button className="btn-red" style={{ padding: "7px 10px" }}>
-                        <Download size={20} />
+                        <Download size={20} color="#fff" />
                     </button>
                 </div>
 
-                <ResponsiveContainer width="90%" height={380} className="my-3 mx-auto">
+                <ResponsiveContainer width="90%" height={400} className="my-3 mx-auto">
                     <LineChart
                         data={graphData}
-                        margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
+                        margin={{ top: 20, right: 20, left: 40, bottom: 50 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis
@@ -440,7 +440,7 @@ const Dashboard = () => {
                             label={{
                                 value: "Meeting Expenses over Time",
                                 position: "bottom",
-                                offset: 10,
+                                offset: 30,
                                 fontSize: 20,
                                 fontStyle: "italic",
                             }}
@@ -452,6 +452,7 @@ const Dashboard = () => {
                                 position: "left",
                                 fontSize: 20,
                                 fontStyle: "italic",
+                                offset: 30,
                             }}
                         />
                         <Tooltip />

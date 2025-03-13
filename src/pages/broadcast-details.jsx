@@ -1,4 +1,4 @@
-import { Pen, Printer } from "lucide-react";
+import { Printer } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -52,9 +52,9 @@ const BroadcastDetails = () => {
             </span>
 
             <div className="d-flex align-items-center justify-content-between">
-                <h5 className="my-2 text-red fw-semibold text-26">Broadcast Details</h5>
+                <h5 className="my-2 text-red fw-semibold text-26">BROADCAST DETAILS</h5>
                 <button className="btn-red fw-normal" style={{ padding: "8px 30px" }}>
-                    <Printer size={18} /> Print
+                    <Printer size={18} color="#fff" /> Print
                 </button>
             </div>
 
@@ -94,12 +94,12 @@ const BroadcastDetails = () => {
                     {broadcastDetails.map((data, idx) => (
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                             <div className="col-6 ">
-                                <label>{data.label}</label>
+                                <label className="text-18 text-secondary2 fw-medium">{data.label}</label>
                             </div>
                             <div className="col-6">
                                 <label className="text">
                                     <span className="me-3">
-                                        <span className="text-dark fw-semibold">
+                                        <span className="fw-medium text-18">
                                             : {data.value}
                                         </span>
                                     </span>

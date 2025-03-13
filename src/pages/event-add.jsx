@@ -50,14 +50,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card3 px-1 text-secondary"
+                                    className="position-absolute bg-label px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Title
                                 </label>
                                 <input
                                     type="text"
-                                    className="bg-card3 w-100"
+                                    className="bg-label w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -65,14 +65,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card3 px-1 text-secondary"
+                                    className="position-absolute bg-label px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Venue
                                 </label>
                                 <input
                                     type="text"
-                                    className="bg-card3 w-100"
+                                    className="bg-label w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -80,13 +80,13 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card3 px-1 text-secondary z-1"
+                                    className="position-absolute bg-label px-1 text-secondary z-1"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Start Date
                                 </label>
                                 <div className="position-relative">
-                                    <Calendar className="calendar-icon" />
+                                    <Calendar className="calendar-icon" color="#c72030" />
                                     <DatePicker
                                         selected={startDate}
                                         onChange={(date) => setStartDate(date)}
@@ -103,13 +103,13 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card3 px-1 text-secondary z-1"
+                                    className="position-absolute bg-label px-1 text-secondary z-1"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     End Date
                                 </label>
                                 <div className="position-relative">
-                                    <Calendar className="calendar-icon" />
+                                    <Calendar className="calendar-icon" color="#c72030" />
                                     <DatePicker
                                         selected={endDate}
                                         onChange={(date) => setEndDate(date)}
@@ -127,14 +127,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card3 px-1 text-secondary"
+                                    className="position-absolute bg-label px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Start Time
                                 </label>
                                 <input
                                     type="time"
-                                    className="bg-card3 w-100"
+                                    className="bg-label w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -142,14 +142,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card3 px-1 text-secondary"
+                                    className="position-absolute bg-label px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     End Time
                                 </label>
                                 <input
                                     type="time"
-                                    className="bg-card3 w-100"
+                                    className="bg-label w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -157,14 +157,14 @@ const AddEvent = () => {
                         <div className="col-md-6 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card3 px-1 text-secondary"
+                                    className="position-absolute bg-label px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Description
                                 </label>
                                 <textarea
                                     rows={1}
-                                    className="bg-card3 w-100"
+                                    className="bg-label w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -281,6 +281,7 @@ const AddEvent = () => {
                         <label htmlFor="fileUpload">{fileNames}</label>
                         <InfoIcon
                             className="cursor-pointer text-red"
+                            color="#c72030"
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
                             title="Allowed file types: JPG, PNG, PDF. Max size: 5MB."

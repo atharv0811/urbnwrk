@@ -156,7 +156,7 @@ const User = () => {
                     <tbody className="text-nowrap">
                         {tableData.map((data, index) => (
                             <tr key={index}>
-                                <td>
+                                <td className="text-center">
                                     <Eye
                                         size={20}
                                         style={{ cursor: "pointer" }}

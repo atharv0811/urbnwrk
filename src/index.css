@@ -16,6 +16,7 @@
 
 * {
   font-family: "Work Sans", sans-serif;
+  color: #1a1a1a;
 }
 
 .text-18 {
@@ -45,10 +46,12 @@
 .btn {
   background-color: var(--card-bg-color);
   border: 1px solid #e2e2e2 !important;
+  color: rgba(26, 26, 26, 0.65)
 }
 
 .btn:hover {
   background-color: var(--card-bg-color);
+  color: rgba(26, 26, 26, 0.65)
 }
 
 .btn-red {
@@ -60,6 +63,10 @@
 
 .text-red {
   color: var(--red) !important;
+}
+
+.text-success {
+  color: #3A8E5C !important;
 }
 
 .border-red {
@@ -93,6 +100,10 @@
 .capsule-secondary {
   background-color: #808080;
   color: white !important;
+}
+
+.bg-label {
+  background: #fcfbf9;
 }
 
 .navbar {
@@ -173,7 +184,7 @@ select,
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  justify-content: center !important;
   gap: 5px !important;
 }
 
@@ -283,7 +294,7 @@ select,
 }
 
 .bg-card3 {
-  background: rgba(246, 244, 238, 1);
+  background: rgba(246, 244, 238, 0.38);
 }
 
 .dashboard-card1 .right span {
@@ -311,7 +322,7 @@ select,
 }
 
 .text-secondary2 {
-  color: #c0bdbd !important;
+  color: rgba(26, 26, 26, 0.59) !important;
 }
 
 .bg-secondary2 {
@@ -332,7 +343,7 @@ select,
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
-  color: var(--red);
+  color: var(--red) !important;
   z-index: 1;
 }
 
@@ -348,7 +359,7 @@ select,
 .date-input-lg {
   padding: 10px 12px 10px 40px !important;
   border: 1px solid #b3b2b2 !important;
-  background-color: var(--card-bg-color) !important;
+  background-color: #fcfbf9 !important;
   /* font-size: small; */
 }
 
@@ -409,13 +420,13 @@ select,
 th {
   font-weight: 500;
   font-size: 16px !important;
-  padding: 7px 20px;
+  padding: 7px 30px;
   border-right: 2px solid white;
 }
 
 td {
   font-size: 15px;
-  padding: 10px 20px;
+  padding: 10px 30px;
 }
 
 .status-dropdown {

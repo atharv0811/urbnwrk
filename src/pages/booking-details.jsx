@@ -81,11 +81,11 @@ const timelineData = [
 const BookingDetails = () => {
     return (
         <>
-            <span className="text-secondary">
+            <span className="text-secondary text-18 fw-medium">
                 <Link to="/bookings" className="text-decoration-none text-secondary">Booking</Link> {">"} Booking details
             </span>
 
-            <h5 className="my-2 text-red fw-semibold">BOOKING DETAILS</h5>
+            <h5 className="my-2 text-red fw-semibold text-26">BOOKING DETAILS</h5>
 
             <div className="card bg-card3 card-shadow my-4" style={{ padding: "15px 40px" }}>
                 <div className="row px-3">
@@ -93,12 +93,12 @@ const BookingDetails = () => {
                         bookingData.map((data, idx) => (
                             <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                                 <div className="col-6 ">
-                                    <label>{data.lable}</label>
+                                    <label className="text-18 text-secondary2 fw-medium">{data.lable}</label>
                                 </div>
                                 <div className="col-6">
                                     <label className="text">
                                         <span className="me-3">
-                                            <span className="text-dark fw-semibold">
+                                            <span className="fw-medium text-18">
                                                 : {data.value}
                                             </span>
                                         </span>
@@ -114,7 +114,7 @@ const BookingDetails = () => {
 
             <div className="card card-shadow bg-card3 my-4 py-4 px-5">
                 <h4 className="text-red fw-semibold mb-0">
-                    <File className="me-2" /> Logs
+                    <img src="/logs.svg" alt="" /> Logs
                 </h4>
 
                 {/* Timeline */}
@@ -143,7 +143,7 @@ const BookingDetails = () => {
 
                 <div className="mt-4">
                     <button className="btn-red fw-light d-flex align-items-center gap-2" style={{ padding: "4px 20px" }}>
-                        <CircleChevronDownIcon size={15} /> View More
+                        <CircleChevronDownIcon size={15} color="#fff" /> View More
                     </button>
                 </div>
             </div>
