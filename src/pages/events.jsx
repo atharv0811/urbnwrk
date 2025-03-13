@@ -121,17 +121,6 @@ const Events = () => {
 
             <h5 className="my-2 text-red fw-semibold text-26">EVENT LIST</h5>
 
-            {/* <div className="d-flex align-items-center justify-content-end my-4 gap-2">
-                <Link to="add-event">
-                    <button className="btn-red fw-normal" style={{ padding: "8px 30px" }}>
-                        + Add
-                    </button>
-                </Link>
-                <button className="btn-red fw-normal d-flex align-items-center gap-2" style={{ padding: "8px 30px" }}>
-                    <SlidersHorizontal size={15} /> Filter
-                </button>
-            </div> */}
-
             <div className="d-flex align-items-center justify-content-between">
                 <div className="d-flex align-items-center gap-2">
                     <div className="position-relative">
@@ -179,7 +168,7 @@ const Events = () => {
             </div>
 
             <div className="table-responsive">
-                <table className="text-end custom-table w-100">
+                <table className="text-start custom-table w-100">
                     <thead className="text-nowrap">
                         <tr>
                             <th>View</th>
@@ -203,8 +192,8 @@ const Events = () => {
                                         } />
                                     </td>
                                     <td>{data.title}</td>
-                                    <td>{data.startDate}</td>
-                                    <td>{data.endDate}</td>
+                                    <td className="text-end">{data.startDate}</td>
+                                    <td className="text-end">{data.endDate}</td>
                                     <td>
                                         <span className="capsule">
                                             {data.eventType}
@@ -241,7 +230,7 @@ const Events = () => {
                                         </div>
                                     </td>
                                     <td>{data.attachments}</td>
-                                    <td>{data.createdOn}</td>
+                                    <td className="text-end">{data.createdOn}</td>
                                     <td>{data.createdBy}</td>
                                 </tr>
                             ))

@@ -73,7 +73,7 @@ const Bookings = () => {
         <>
             <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3">
                 <div
-                    className="card card-shadow card-border bg-card d-flex flex-row align-items-start justify-content-between"
+                    className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between"
                     style={{ height: "160px", padding: "25px 50px" }}
                 >
                     <div className="d-flex flex-column gap-2 w-50">
@@ -90,7 +90,7 @@ const Bookings = () => {
                     </div>
                 </div>
                 <div
-                    className="card card-shadow card-border bg-card d-flex flex-row align-items-start justify-content-between gap-3"
+                    className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between gap-3"
                     style={{ height: "160px", padding: "25px 50px" }}
                 >
                     <div className="d-flex flex-column gap-2 w-50">
@@ -107,7 +107,7 @@ const Bookings = () => {
                     </div>
                 </div>
                 <div
-                    className="card card-shadow card-border bg-card d-flex flex-row align-items-start justify-content-between gap-3"
+                    className="card card-shadow card-border bg-card3 d-flex flex-row align-items-start justify-content-between gap-3"
                     style={{ height: "160px", padding: "25px 50px" }}
                 >
                     <div className="d-flex flex-column gap-2 w-50">
@@ -152,7 +152,7 @@ const Bookings = () => {
             </div>
 
             <div className="table-responsive">
-                <table className="text-end custom-table w-100">
+                <table className="text-start custom-table w-100">
                     <thead className="text-nowrap">
                         <tr>
                             <th>View</th>
@@ -178,14 +178,14 @@ const Bookings = () => {
                                         }}
                                     />
                                 </td>
-                                <td>{data.bookingId}</td>
+                                <td className="text-end">{data.bookingId}</td>
                                 <td>{data.bookedBy}</td>
                                 <td>{data.facultyName}</td>
-                                <td>{data.scheduledDate}</td>
-                                <td>{data.scheduledTime}</td>
+                                <td className="text-end">{data.scheduledDate}</td>
+                                <td className="text-end">{data.scheduledTime}</td>
                                 <td>{data.bookingStatus}</td>
                                 <td>{data.paymentStatus}</td>
-                                <td>{data.createdOn}</td>
+                                <td className="text-end">{data.createdOn}</td>
                             </tr>
                         ))}
                     </tbody>

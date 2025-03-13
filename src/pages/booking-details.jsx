@@ -87,7 +87,7 @@ const BookingDetails = () => {
 
             <h5 className="my-2 text-red fw-semibold">BOOKING DETAILS</h5>
 
-            <div className="card bg-card card-shadow my-4" style={{ padding: "15px 40px" }}>
+            <div className="card bg-card3 card-shadow my-4" style={{ padding: "15px 40px" }}>
                 <div className="row px-3">
                     {
                         bookingData.map((data, idx) => (
@@ -112,7 +112,7 @@ const BookingDetails = () => {
 
             <h5 className="mt-5 mb-2 text-red fw-semibold">LOGS</h5>
 
-            <div className="card card-shadow bg-card my-4 py-4 px-5">
+            <div className="card card-shadow bg-card3 my-4 py-4 px-5">
                 <h4 className="text-red fw-semibold mb-0">
                     <File className="me-2" /> Logs
                 </h4>

@@ -42,7 +42,7 @@ const AddEvent = () => {
             <h5 className="my-2 text-red fw-semibold text-26">NEW EVENT</h5>
 
             <form>
-                <div className="card card-shadow bg-card p-3 my-4">
+                <div className="card card-shadow bg-card3 p-3 my-4">
                     <span className="fw-medium">EVENT INFORMATION</span>
                     <span className="divider-horizontal"></span>
 
@@ -50,14 +50,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Title
                                 </label>
                                 <input
                                     type="text"
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -65,14 +65,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Venue
                                 </label>
                                 <input
                                     type="text"
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -80,7 +80,7 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary z-1"
+                                    className="position-absolute bg-card3 px-1 text-secondary z-1"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Start Date
@@ -103,7 +103,7 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary z-1"
+                                    className="position-absolute bg-card3 px-1 text-secondary z-1"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     End Date
@@ -127,14 +127,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Start Time
                                 </label>
                                 <input
                                     type="time"
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -142,14 +142,14 @@ const AddEvent = () => {
                         <div className="col-md-6 col-lg-3 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     End Time
                                 </label>
                                 <input
                                     type="time"
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -157,14 +157,14 @@ const AddEvent = () => {
                         <div className="col-md-6 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Description
                                 </label>
                                 <textarea
                                     rows={1}
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -268,7 +268,7 @@ const AddEvent = () => {
                     </div>
                 </div>
 
-                <div className="card card-shadow bg-card p-3 my-4">
+                <div className="card card-shadow bg-card3 p-3 my-4">
                     <span className="fw-medium">ATTACHMENTS</span>
                     <span className="divider-horizontal"></span>
 

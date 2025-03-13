@@ -34,7 +34,7 @@ const AddBroadcast = () => {
             <h5 className="my-2 text-red fw-semibold text-26">NEW BROADCAST</h5>
 
             <form>
-                <div className="card card-shadow bg-card p-3 my-4">
+                <div className="card card-shadow bg-card3 p-3 my-4">
                     <span className="fw-medium">COMMUNICATION INFORMATION</span>
                     <span className="divider-horizontal"></span>
 
@@ -42,14 +42,14 @@ const AddBroadcast = () => {
                         <div className="col-md-6 col-lg-4 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Title
                                 </label>
                                 <input
                                     type="text"
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -58,14 +58,14 @@ const AddBroadcast = () => {
                         <div className="col-md-6 col-lg-8 mb-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     Description
                                 </label>
                                 <textarea
                                     rows={1}
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -77,7 +77,7 @@ const AddBroadcast = () => {
                             <div className="d-flex align-items-center">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary z-1"
+                                        className="position-absolute bg-card3 px-1 text-secondary z-1"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         End Date
@@ -99,14 +99,14 @@ const AddBroadcast = () => {
                         <div className="col-md-4">
                             <div className="position-relative form-group w-100">
                                 <label
-                                    className="position-absolute bg-card px-1 text-secondary"
+                                    className="position-absolute bg-card3 px-1 text-secondary"
                                     style={{ top: "-15px", left: "5px" }}
                                 >
                                     End Time
                                 </label>
                                 <input
                                     type="time"
-                                    className="bg-card w-100"
+                                    className="bg-card3 w-100"
                                     style={{ padding: "8px" }}
                                 />
                             </div>
@@ -114,7 +114,7 @@ const AddBroadcast = () => {
                     </div>
                 </div>
 
-                <div className="card card-shadow bg-card p-3 my-4">
+                <div className="card card-shadow bg-card3 p-3 my-4">
                     <span className="fw-medium">ATTACHMENTS</span>
                     <span className="divider-horizontal"></span>
 
@@ -130,7 +130,7 @@ const AddBroadcast = () => {
                     </div>
                 </div>
 
-                <div className="card card-shadow bg-card p-3 my-4">
+                <div className="card card-shadow bg-card3 p-3 my-4">
                     <span className="fw-medium">SHARE WITH</span>
                     <span className="divider-horizontal"></span>
 

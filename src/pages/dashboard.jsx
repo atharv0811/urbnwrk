@@ -67,9 +67,9 @@ const statusOptions = [
 const CustomLegend = () => (
     <div className="custom-legend">
         <p className="total-tickets">
-            <strong>
-                Total Tickets : <span className="text-danger">100</span>
-            </strong>
+            <span className="text-red text-18">
+                Total Tickets : <span className="fw-semibold">100</span>
+            </span>
         </p>
         <div className="legend-item">
             <span
@@ -349,7 +349,7 @@ const Dashboard = () => {
                     <span className="divider-horizontal"></span>
 
                     <div
-                        className="card bg-card d-flex flex-column justify-content-center gap-2"
+                        className="card bg-card2 d-flex flex-column justify-content-center gap-2"
                         style={{ height: "150px" }}
                     >
                         <span className="text-red text-24">
@@ -370,7 +370,7 @@ const Dashboard = () => {
 
                     <div className="d-flex align-items-center gap-2">
                         <div
-                            className="card bg-card d-flex flex-column justify-content-center gap-2"
+                            className="card bg-card2 d-flex flex-column justify-content-center gap-2"
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
                             <span className="text-red text-24">
@@ -379,7 +379,7 @@ const Dashboard = () => {
                             <span className="fw-medium text-20">Booked Amount</span>
                         </div>
                         <div
-                            className="card bg-card  d-flex flex-column justify-content-center gap-2"
+                            className="card bg-card2  d-flex flex-column justify-content-center gap-2"
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
                             <span className="text-success text-24">
@@ -388,11 +388,11 @@ const Dashboard = () => {
                             <span className="fw-medium text-20">Refund Amount</span>
                         </div>
                         <div
-                            className="card bg-card  d-flex flex-column justify-content-center gap-2"
+                            className="card bg-card2  d-flex flex-column justify-content-center gap-2"
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
-                            <span className="text-secondary text-24">
-                                <Clock size={18} /> <span className="fw-semibold">15000</span>{" "}
+                            <span className="text-secondary text-24 d-flex align-items-center gap-2">
+                                <img src="/pending-refund-amount.svg" alt="" /> <span className="fw-semibold">15000</span>{" "}
                                 INR
                             </span>
                             <span className="fw-medium text-20">Pending Refund Amount</span>

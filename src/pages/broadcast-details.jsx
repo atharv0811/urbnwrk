@@ -58,7 +58,7 @@ const BroadcastDetails = () => {
                 </button>
             </div>
 
-            <div className="card bg-card card-shadow my-4 p-3">
+            <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="mb-3 d-flex align-items-center gap-3">
                     <span className="fw-semibold">Status Type</span>{" "}
                     <div className="dropdown">
@@ -110,7 +110,7 @@ const BroadcastDetails = () => {
                 </div>
             </div>
 
-            <div className="card card-shadow bg-card p-3 my-4">
+            <div className="card card-shadow bg-card3 p-3 my-4">
                 <span className="fw-medium">DESCRIPTION</span>
                 <span className="divider-horizontal"></span>
 
@@ -119,7 +119,7 @@ const BroadcastDetails = () => {
                 </p>
             </div>
 
-            <div className="card card-shadow bg-card p-3 my-4">
+            <div className="card card-shadow bg-card3 p-3 my-4">
                 <span className="fw-medium">ATTACHMENTS</span>
                 <span className="divider-horizontal"></span>
 
@@ -128,7 +128,7 @@ const BroadcastDetails = () => {
                 </div>
             </div>
 
-            <div className="card card-shadow bg-card p-3 my-4">
+            <div className="card card-shadow bg-card3 p-3 my-4">
                 <span className="fw-medium">SHARED WITH</span>
                 <span className="divider-horizontal"></span>
 
@@ -139,12 +139,12 @@ const BroadcastDetails = () => {
                 </ol>
             </div>
 
-            <div className="card card-shadow bg-card p-3 my-4">
+            <div className="card card-shadow bg-card3 p-3 my-4">
                 <span className="fw-medium">READ BY</span>
                 <span className="divider-horizontal"></span>
 
                 <div className="table-responsive">
-                    <table className="text-end custom-table w-100">
+                    <table className="text-start custom-table w-100">
                         <thead className="text-nowrap">
                             <tr>
                                 <th>

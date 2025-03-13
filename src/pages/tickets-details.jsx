@@ -105,7 +105,7 @@ const TicketsDetails = () => {
 
             <h5 className="my-2 text-red fw-semibold text-26">TICKET DETAILS</h5>
 
-            <div className="card bg-card card-shadow my-4 p-3">
+            <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
                     {ticketDetails.map((data, idx) => (
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
@@ -135,7 +135,7 @@ const TicketsDetails = () => {
                 CREATOR'S INFORMATION
             </h5>
 
-            <div className="card bg-card card-shadow my-4 p-3">
+            <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
                     {creatorDetails.map((data, idx) => (
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
@@ -165,7 +165,7 @@ const TicketsDetails = () => {
                 LOCATION INFORMATION
             </h5>
 
-            <div className="card bg-card card-shadow my-4 p-3">
+            <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
                     {locationDetails.map((data, idx) => (
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
@@ -195,7 +195,7 @@ const TicketsDetails = () => {
                 ADDITIONAL INFORMATION
             </h5>
 
-            <div className="card bg-card card-shadow my-4 p-3">
+            <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
@@ -508,7 +508,7 @@ const TicketsDetails = () => {
                 ATTACHMENTS
             </h5>
 
-            <div className="card card-shadow bg-card p-3 my-4">
+            <div className="card card-shadow bg-card3 p-3 my-4">
                 <div>
                     <img src="/image.png" alt="" className="rounded-2" />
                 </div>

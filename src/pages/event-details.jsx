@@ -51,7 +51,7 @@ const EventDetails = () => {
 
             <h5 className="my-2 text-red fw-semibold text-26">Event Details</h5>
 
-            <div className="card bg-card card-shadow my-4 p-3">
+            <div className="card bg-card3 card-shadow my-4 p-3">
                 <span className="fw-medium">EVENT DETAILS</span>
                 <span className="divider-horizontal"></span>
 
@@ -75,7 +75,7 @@ const EventDetails = () => {
                 </div>
             </div>
 
-            <div className="card card-shadow bg-card p-3 my-4">
+            <div className="card card-shadow bg-card3 p-3 my-4">
                 <span className="fw-medium">DESCRIPTION</span>
                 <span className="divider-horizontal"></span>
 
@@ -84,7 +84,7 @@ const EventDetails = () => {
                 </p>
             </div>
 
-            <div className="card card-shadow bg-card p-3">
+            <div className="card card-shadow bg-card3 p-3">
                 <span className="fw-medium">ATTACHMENTS</span>
                 <span className="divider-horizontal"></span>
 

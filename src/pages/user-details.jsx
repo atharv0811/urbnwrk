@@ -53,8 +53,30 @@ const timelineData = [
     },
 ];
 
+const statusOptions = [
+    { value: "Approved", label: "Approve", color: "green" },
+    { value: "Rejected", label: "Reject", color: "red" },
+];
+
 const UserDetails = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [selectedStatus, setSelectedStatus] = useState("Pending");
+
+    const handleStatusChange = (status) => {
+        setSelectedStatus(status);
+    };
+
+    const statusBgColors = {
+        Approved: "#3A8E5C",
+        Rejected: "#B71C1C",
+        Pending: "#F9A825"
+    };
+
+    const statusTextColors = {
+        Approved: "white",
+        Rejected: "white",
+        Pending: "black"
+    };
 
     return (
         <>
@@ -68,7 +90,7 @@ const UserDetails = () => {
             <h5 className="my-2 text-red fw-semibold text-26">MY USERS DETAILS</h5>
 
             <div
-                className="card card-shadow bg-card my-4 position-relative"
+                className="card card-shadow bg-card3 my-4 position-relative"
                 style={{ padding: "15px 50px" }}
             >
                 <div
@@ -98,9 +120,34 @@ const UserDetails = () => {
                             style={{ bottom: "15px", right: "5px", cursor: "pointer" }}
                         />
                     </div>
-                    <span className="bg-secondary2 py-2 px-4 text-black fw-medium">
-                        Pending
-                    </span>
+                    <div className="dropdown">
+                        <button
+                            className="btn dropdown-toggle status-dropdown rounded-0"
+                            type="button"
+                            id={`dropdownMenuButton`}
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            style={{
+                                backgroundColor: statusBgColors[selectedStatus],
+                                color: statusTextColors[selectedStatus],
+                            }}
+                        >
+                            {selectedStatus}
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton`}>
+                            {statusOptions.map((option) => (
+                                <li key={option.value}>
+                                    <button
+                                        className="dropdown-item"
+                                        onClick={() => handleStatusChange(option.value)}
+                                        style={{ color: option.color }}
+                                    >
+                                        {option.label}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
 
                 <div className="mt-5">
@@ -109,14 +156,14 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         First Name
                                     </label>
                                     <input
                                         type="text"
-                                        className="bg-card w-100"
+                                        className="bg-card3 w-100"
                                         style={{ padding: "8px" }}
                                     />
                                 </div>
@@ -124,14 +171,14 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         Last Name
                                     </label>
                                     <input
                                         type="text"
-                                        className="bg-card w-100"
+                                        className="bg-card3 w-100"
                                         style={{ padding: "8px" }}
                                     />
                                 </div>
@@ -139,12 +186,12 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         Gender
                                     </label>
-                                    <select className="bg-card w-100" style={{ padding: "10px" }}>
+                                    <select className="bg-card3 w-100" style={{ padding: "10px" }}>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
@@ -153,14 +200,14 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         E-mail ID
                                     </label>
                                     <input
                                         type="email"
-                                        className="bg-card w-100"
+                                        className="bg-card3 w-100"
                                         style={{ padding: "8px" }}
                                     />
                                 </div>
@@ -168,14 +215,14 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         Mobile Number
                                     </label>
                                     <input
                                         type="number"
-                                        className="bg-card w-100"
+                                        className="bg-card3 w-100"
                                         style={{ padding: "8px" }}
                                     />
                                 </div>
@@ -183,12 +230,12 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         Access Level
                                     </label>
-                                    <select className="bg-card w-100" style={{ padding: "10px" }}>
+                                    <select className="bg-card3 w-100" style={{ padding: "10px" }}>
                                         <option value="male">Site</option>
                                         <option value="female">Office</option>
                                     </select>
@@ -197,12 +244,12 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         User Type
                                     </label>
-                                    <select className="bg-card w-100" style={{ padding: "10px" }}>
+                                    <select className="bg-card3 w-100" style={{ padding: "10px" }}>
                                         <option value="male">Admin</option>
                                         <option value="female">User</option>
                                     </select>
@@ -211,14 +258,14 @@ const UserDetails = () => {
                             <div className="col-md-6 col-lg-4 mb-4">
                                 <div className="position-relative form-group w-100">
                                     <label
-                                        className="position-absolute bg-card px-1 text-secondary"
+                                        className="position-absolute bg-card3 px-1 text-secondary"
                                         style={{ top: "-15px", left: "5px" }}
                                     >
                                         Employee ID
                                     </label>
                                     <input
                                         type="number"
-                                        className="bg-card w-100"
+                                        className="bg-card3 w-100"
                                         style={{ padding: "8px" }}
                                     />
                                 </div>
@@ -242,14 +289,14 @@ const UserDetails = () => {
                                 <div className="col-md-6 col-lg-4 mb-4">
                                     <div className="position-relative form-group w-100">
                                         <label
-                                            className="position-absolute bg-card px-1 text-secondary"
+                                            className="position-absolute bg-card3 px-1 text-secondary"
                                             style={{ top: "-15px", left: "5px" }}
                                         >
                                             Birth Date
                                         </label>
                                         <input
                                             type="date"
-                                            className="bg-card w-100"
+                                            className="bg-card3 w-100"
                                             style={{ padding: "8px" }}
                                         />
                                     </div>
@@ -257,14 +304,14 @@ const UserDetails = () => {
                                 <div className="col-md-6 col-lg-4 mb-4">
                                     <div className="position-relative form-group w-100">
                                         <label
-                                            className="position-absolute bg-card px-1 text-secondary"
+                                            className="position-absolute bg-card3 px-1 text-secondary"
                                             style={{ top: "-15px", left: "5px" }}
                                         >
                                             Address
                                         </label>
                                         <input
                                             type="text"
-                                            className="bg-card w-100"
+                                            className="bg-card3 w-100"
                                             style={{ padding: "8px" }}
                                         />
                                     </div>
@@ -272,14 +319,14 @@ const UserDetails = () => {
                                 <div className="col-md-6 col-lg-4 mb-4">
                                     <div className="position-relative form-group w-100">
                                         <label
-                                            className="position-absolute bg-card px-1 text-secondary"
+                                            className="position-absolute bg-card3 px-1 text-secondary"
                                             style={{ top: "-15px", left: "5px" }}
                                         >
                                             Alternate Mobile Number
                                         </label>
                                         <input
                                             type="number"
-                                            className="bg-card w-100"
+                                            className="bg-card3 w-100"
                                             style={{ padding: "8px" }}
                                         />
                                     </div>
@@ -287,14 +334,14 @@ const UserDetails = () => {
                                 <div className="col-md-6 col-lg-4 mb-4">
                                     <div className="position-relative form-group w-100">
                                         <label
-                                            className="position-absolute bg-card px-1 text-secondary"
+                                            className="position-absolute bg-card3 px-1 text-secondary"
                                             style={{ top: "-15px", left: "5px" }}
                                         >
                                             Alternate Email
                                         </label>
                                         <input
                                             type="email"
-                                            className="bg-card w-100"
+                                            className="bg-card3 w-100"
                                             style={{ padding: "8px" }}
                                         />
                                     </div>
@@ -302,14 +349,14 @@ const UserDetails = () => {
                                 <div className="col-md-6 col-lg-4 mb-4">
                                     <div className="position-relative form-group w-100">
                                         <label
-                                            className="position-absolute bg-card px-1 text-secondary"
+                                            className="position-absolute bg-card3 px-1 text-secondary"
                                             style={{ top: "-15px", left: "5px" }}
                                         >
                                             Aadhar Number
                                         </label>
                                         <input
                                             type="number"
-                                            className="bg-card w-100"
+                                            className="bg-card3 w-100"
                                             style={{ padding: "8px" }}
                                         />
                                     </div>
@@ -317,14 +364,14 @@ const UserDetails = () => {
                                 <div className="col-md-6 col-lg-4 mb-4">
                                     <div className="position-relative form-group w-100">
                                         <label
-                                            className="position-absolute bg-card px-1 text-secondary"
+                                            className="position-absolute bg-card3 px-1 text-secondary"
                                             style={{ top: "-15px", left: "5px" }}
                                         >
                                             Designation
                                         </label>
                                         <input
                                             type="text"
-                                            className="bg-card w-100"
+                                            className="bg-card3 w-100"
                                             style={{ padding: "8px" }}
                                         />
                                     </div>
@@ -375,7 +422,7 @@ const UserDetails = () => {
 
             <h5 className="mt-5 mb-2 text-red fw-semibold">LOGS</h5>
 
-            <div className="card card-shadow bg-card my-4 py-4 px-5">
+            <div className="card card-shadow bg-card3 my-4 py-4 px-5">
                 <h4 className="text-red fw-semibold mb-0">
                     <File className="me-2" /> Logs
                 </h4>
