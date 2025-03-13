@@ -76,7 +76,7 @@ const User = () => {
         <>
             <div className="row g-3">
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                             <span className="text-red text-24 fw-semibold">250</span>
                             <span className="text-secondary text-22 fw-medium">Total Users</span>
@@ -85,7 +85,7 @@ const User = () => {
                 </div>
 
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                             <strong className="text-red text-24 fw-semibold">30</strong>
                             <span className="text-secondary text-22 fw-medium">Pending</span>
@@ -94,7 +94,7 @@ const User = () => {
                 </div>
 
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                             <strong className="text-red text-24 fw-semibold">22</strong>
                             <span className="text-secondary text-22 fw-medium">Approved</span>
@@ -103,7 +103,7 @@ const User = () => {
                 </div>
 
                 <div className="col-lg-3 col-md-6">
-                    <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                    <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                         <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                             <strong className="text-red text-24 fw-semibold">10</strong>
                             <span className="text-secondary text-22 fw-medium">Rejected</span>
@@ -142,7 +142,7 @@ const User = () => {
                 <table className="text-start custom-table w-100">
                     <thead className="text-nowrap">
                         <tr>
-                            <th>View</th>
+                            <th className="text-center">View</th>
                             <th>Name</th>
                             <th>Email ID</th>
                             <th>Mobile No</th>
@@ -167,8 +167,8 @@ const User = () => {
                                 </td>
                                 <td>{data.name}</td>
                                 <td>{data.email}</td>
-                                <td className="text-end">{data.mobileNo}</td>
-                                <td>
+                                <td>{data.mobileNo}</td>
+                                <td style={{ padding: "10px 0" }}>
                                     <div className="dropdown">
                                         <button
                                             className="btn dropdown-toggle status-dropdown rounded-0"
@@ -198,9 +198,9 @@ const User = () => {
                                         </ul>
                                     </div>
                                 </td>
-                                <td className="text-end">{data.userId}</td>
+                                <td>{data.userId}</td>
                                 <td>{data.userType}</td>
-                                <td className="text-end">{data.createdDate}</td>
+                                <td>{data.createdDate}</td>
                                 <td className="text-center">
                                     <button
                                         className="toggle-button"

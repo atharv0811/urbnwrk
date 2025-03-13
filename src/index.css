@@ -11,7 +11,7 @@
   --light-grey: #8692a6;
   --text-color: #084236;
   --scrollbar-color: #c72030;
-  --card-bg-color: #f6f4ee;
+  --card-bg-color: rgba(246, 244, 238, 1);
 }
 
 * {
@@ -103,7 +103,7 @@
 }
 
 .bg-label {
-  background: #fcfbf9;
+  background: #faf8f5;
 }
 
 .navbar {
@@ -294,7 +294,7 @@ select,
 }
 
 .bg-card3 {
-  background: rgba(246, 244, 238, 0.80);
+  background: rgba(246, 244, 238, 0.60);
 }
 
 .dashboard-card1 .right span {
@@ -359,7 +359,7 @@ select,
 .date-input-lg {
   padding: 10px 12px 10px 40px !important;
   border: 1px solid #b3b2b2 !important;
-  background-color: #fcfbf9 !important;
+  background-color: #faf8f5 !important;
   /* font-size: small; */
 }
 
@@ -427,6 +427,7 @@ th {
 td {
   font-size: 15px;
   padding: 10px 30px;
+  border-right: 2px solid white;
 }
 
 .status-dropdown {

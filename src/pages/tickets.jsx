@@ -60,31 +60,31 @@ const Tickets = () => {
     return (
         <>
             <div className="d-flex align-items-center justify-content-between gap-3">
-                <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                     <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                         <span className="text-red text-24 fw-semibold">250</span>
                         <span className="text-secondary text-22 fw-medium">Closed Tickets</span>
                     </div>
                 </div>
-                <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                     <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                         <span className="text-red text-24 fw-semibold">30</span>
                         <span className="text-secondary text-22 fw-medium">Open Tickets</span>
                     </div>
                 </div>
-                <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                     <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                         <span className="text-red text-24 fw-semibold">25</span>
                         <span className="text-secondary text-22 fw-medium">Complaints</span>
                     </div>
                 </div>
-                <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                     <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                         <span className="text-red text-24 fw-semibold">10</span>
                         <span className="text-secondary text-22 fw-medium">Suggestions</span>
                     </div>
                 </div>
-                <div className="card card-shadow card-border bg-card3 d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
+                <div className="card card-shadow card-border bg-card d-flex align-items-center justify-content-center gap-3 p-4" style={{ height: "142px" }}>
                     <div className="d-flex flex-column gap-2 align-items-center justify-content-center">
                         <span className="text-red text-24 fw-semibold">10</span>
                         <span className="text-secondary text-22 fw-medium">Requests</span>
@@ -142,7 +142,7 @@ const Tickets = () => {
                 <table className="text-start custom-table w-100">
                     <thead className="text-nowrap">
                         <tr>
-                            <th>View</th>
+                            <th className="text-center">View</th>
                             <th>Ticket Number</th>
                             <th>Description</th>
                             <th>Category</th>
@@ -158,7 +158,7 @@ const Tickets = () => {
                                     <td className="text-center">
                                         <Eye size={20} style={{ cursor: "pointer" }} onClick={() => navigate(`/tickets/${index}`)} />
                                     </td>
-                                    <td className="text-end">{data.ticketNo}</td>
+                                    <td>{data.ticketNo}</td>
                                     <td>{data.description}</td>
                                     <td>{data.category}</td>
                                     <td>{data.subCategory}</td>

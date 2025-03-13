@@ -42,8 +42,22 @@ const userData = {
     Pending: [
         { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
         { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
+        { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
+        { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
+        { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
+        { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
+        { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
+        { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
     ],
     Rejected: [
+        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
+        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
+        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
+        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
+        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
+        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
+        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
+        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
         { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
         { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
     ],
@@ -292,7 +306,7 @@ const Dashboard = () => {
                         <table className="text-start custom-table w-100">
                             <thead className="text-nowrap">
                                 <tr>
-                                    <th>Name</th>
+                                    <th style={{ width: "150px" }}>Name</th>
                                     <th>E-mail ID</th>
                                     <th style={{ width: "200px" }}>Status</th>
                                 </tr>
@@ -302,7 +316,7 @@ const Dashboard = () => {
                                     <tr key={index}>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
-                                        <td>
+                                        <td style={{ padding: "10px 0" }}>
                                             <div className="dropdown">
                                                 <button
                                                     className="btn dropdown-toggle status-dropdown rounded-0"
@@ -338,7 +352,7 @@ const Dashboard = () => {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div >
 
             <div className="d-flex flex-column flex-xl-row my-4" style={{ gap: "2.2rem" }} >
                 <div

@@ -171,7 +171,7 @@ const Events = () => {
                 <table className="text-start custom-table w-100">
                     <thead className="text-nowrap">
                         <tr>
-                            <th>View</th>
+                            <th className="text-center">View</th>
                             <th>Title</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -192,14 +192,14 @@ const Events = () => {
                                         } />
                                     </td>
                                     <td>{data.title}</td>
-                                    <td className="text-end">{data.startDate}</td>
-                                    <td className="text-end">{data.endDate}</td>
+                                    <td>{data.startDate}</td>
+                                    <td>{data.endDate}</td>
                                     <td>
                                         <span className="capsule">
                                             {data.eventType}
                                         </span>
                                     </td>
-                                    <td>
+                                    <td style={{ padding: "10px 0" }}>
                                         <div className="dropdown">
                                             <button
                                                 className="btn dropdown-toggle status-dropdown rounded-0"
@@ -230,7 +230,7 @@ const Events = () => {
                                         </div>
                                     </td>
                                     <td>{data.attachments}</td>
-                                    <td className="text-end">{data.createdOn}</td>
+                                    <td>{data.createdOn}</td>
                                     <td>{data.createdBy}</td>
                                 </tr>
                             ))

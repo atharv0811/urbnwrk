@@ -150,7 +150,7 @@ const Broadcats = () => {
                 <table className="text-start custom-table w-100">
                     <thead className="text-nowrap">
                         <tr>
-                            <th>View</th>
+                            <th className="text-center">View</th>
                             <th>Title</th>
                             <th>Type</th>
                             <th>Created On</th>
@@ -175,10 +175,10 @@ const Broadcats = () => {
                                 </td>
                                 <td>{data.title}</td>
                                 <td>{data.type}</td>
-                                <td className="text-end">{data.createdOn}</td>
+                                <td>{data.createdOn}</td>
                                 <td>{data.createdBy}</td>
                                 <td>{data.status}</td>
-                                <td className="text-end">{data.expiredOn}</td>
+                                <td>{data.expiredOn}</td>
                                 <td>{data.expired}</td>
                                 <td>{data.attachment}</td>
                             </tr>
