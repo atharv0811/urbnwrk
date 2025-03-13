@@ -103,7 +103,7 @@ const TicketsDetails = () => {
                 {">"} Ticket Details
             </span>
 
-            <h5 className="my-2 text-red fw-semibold text-26">TICKET DETAILS</h5>
+            <h5 className="my-2 text-red fw-medium text-26">TICKET DETAILS</h5>
 
             <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
@@ -111,7 +111,7 @@ const TicketsDetails = () => {
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                             <div className="col-6 ">
                                 <label
-                                    className="text-18 fw-medium"
+                                    className="text-18 fw-normal"
                                     style={{ color: "rgba(26, 26, 26, 0.54)" }}
                                 >
                                     {data.label}
@@ -120,7 +120,7 @@ const TicketsDetails = () => {
                             <div className="col-6">
                                 <label className="text">
                                     <span className="me-3">
-                                        <span className="text-dark fw-medium text-18">
+                                        <span className="text-dark fw-normal text-18">
                                             : {data.value}
                                         </span>
                                     </span>
@@ -131,7 +131,7 @@ const TicketsDetails = () => {
                 </div>
             </div>
 
-            <h5 className="my-2 text-red fw-semibold text-26">
+            <h5 className="my-2 text-red fw-medium text-26">
                 CREATOR'S INFORMATION
             </h5>
 
@@ -141,7 +141,7 @@ const TicketsDetails = () => {
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                             <div className="col-6 ">
                                 <label
-                                    className="text-18 fw-medium"
+                                    className="text-18 fw-normal"
                                     style={{ color: "rgba(26, 26, 26, 0.54)" }}
                                 >
                                     {data.label}
@@ -150,7 +150,7 @@ const TicketsDetails = () => {
                             <div className="col-6">
                                 <label className="text">
                                     <span className="me-3">
-                                        <span className="text-dark fw-medium text-18">
+                                        <span className="text-dark fw-normal text-18">
                                             : {data.value}
                                         </span>
                                     </span>
@@ -161,7 +161,7 @@ const TicketsDetails = () => {
                 </div>
             </div>
 
-            <h5 className="my-2 text-red fw-semibold text-26">
+            <h5 className="my-2 text-red fw-medium text-26">
                 LOCATION INFORMATION
             </h5>
 
@@ -171,7 +171,7 @@ const TicketsDetails = () => {
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                             <div className="col-6 ">
                                 <label
-                                    className="text-18 fw-medium"
+                                    className="text-18 fw-normal"
                                     style={{ color: "rgba(26, 26, 26, 0.54)" }}
                                 >
                                     {data.label}
@@ -180,7 +180,7 @@ const TicketsDetails = () => {
                             <div className="col-6">
                                 <label className="text">
                                     <span className="me-3">
-                                        <span className="text-dark fw-medium text-18">
+                                        <span className="text-dark fw-normal text-18">
                                             : {data.value}
                                         </span>
                                     </span>
@@ -191,7 +191,7 @@ const TicketsDetails = () => {
                 </div>
             </div>
 
-            <h5 className="my-2 text-red fw-semibold text-26">
+            <h5 className="my-2 text-red fw-medium text-26">
                 ADDITIONAL INFORMATION
             </h5>
 
@@ -200,7 +200,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Assigned To
@@ -209,7 +209,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -219,7 +219,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 External Priority
@@ -228,7 +228,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -238,7 +238,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Proactive/Reactive
@@ -247,7 +247,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -257,7 +257,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Review(Tracking)
@@ -266,7 +266,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -276,7 +276,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Service Type
@@ -285,7 +285,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -295,7 +295,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Corrective Action
@@ -304,7 +304,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -314,7 +314,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Complaint Mode
@@ -323,7 +323,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -333,7 +333,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Preventive Action
@@ -342,7 +342,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -352,7 +352,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Responsible Person
@@ -361,7 +361,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -371,7 +371,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Impact
@@ -380,7 +380,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -390,7 +390,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Correction
@@ -399,7 +399,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -409,7 +409,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Root Cause
@@ -418,7 +418,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -428,7 +428,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Asset/Service
@@ -437,7 +437,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -447,7 +447,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Task ID
@@ -456,7 +456,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -466,7 +466,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Asset/Service Location
@@ -475,7 +475,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -485,7 +485,7 @@ const TicketsDetails = () => {
                     <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
                         <div className="col-6 ">
                             <label
-                                className="text-18 fw-medium"
+                                className="text-18 fw-normal"
                                 style={{ color: "rgba(26, 26, 26, 0.54)" }}
                             >
                                 Notes
@@ -494,7 +494,7 @@ const TicketsDetails = () => {
                         <div className="col-6">
                             <label className="text">
                                 <span className="me-3">
-                                    <span className="text-dark fw-medium text-18">
+                                    <span className="text-dark fw-normal text-18">
                                         : Customer Cred
                                     </span>
                                 </span>
@@ -504,7 +504,7 @@ const TicketsDetails = () => {
                 </div>
             </div>
 
-            <h5 className="my-2 text-red fw-semibold text-26">
+            <h5 className="my-2 text-red fw-medium text-26">
                 ATTACHMENTS
             </h5>
 

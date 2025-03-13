@@ -85,7 +85,7 @@ const BookingDetails = () => {
                 <Link to="/bookings" className="text-decoration-none text-secondary">Booking</Link> {">"} Booking details
             </span>
 
-            <h5 className="my-2 text-red fw-semibold text-26">BOOKING DETAILS</h5>
+            <h5 className="my-2 text-red fw-medium text-26">BOOKING DETAILS</h5>
 
             <div className="card bg-card3 card-shadow my-4" style={{ padding: "15px 40px" }}>
                 <div className="row px-3">
@@ -93,12 +93,12 @@ const BookingDetails = () => {
                         bookingData.map((data, idx) => (
                             <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                                 <div className="col-6 ">
-                                    <label className="text-18 text-secondary2 fw-medium">{data.lable}</label>
+                                    <label className="text-18 text-secondary2 fw-normal">{data.lable}</label>
                                 </div>
                                 <div className="col-6">
                                     <label className="text">
                                         <span className="me-3">
-                                            <span className="fw-medium text-18">
+                                            <span className="fw-normal text-18">
                                                 : {data.value}
                                             </span>
                                         </span>

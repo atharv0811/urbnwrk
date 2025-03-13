@@ -49,7 +49,7 @@ const EventDetails = () => {
                 {">"} Event Details
             </span>
 
-            <h5 className="my-2 text-red fw-semibold text-26">EVENT DETAILS</h5>
+            <h5 className="my-2 text-red fw-medium text-26">EVENT DETAILS</h5>
 
             <div className="card bg-card3 card-shadow my-4 p-3">
                 <span className="fw-medium">EVENT DETAILS</span>
@@ -59,12 +59,12 @@ const EventDetails = () => {
                     {eventDetails.map((data, idx) => (
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                             <div className="col-6 ">
-                                <label className="text-18 text-secondary2 fw-medium">{data.label}</label>
+                                <label className="text-18 text-secondary2 fw-normal">{data.label}</label>
                             </div>
                             <div className="col-6">
                                 <label className="text">
                                     <span className="me-3">
-                                        <span className="fw-medium text-18">
+                                        <span className="fw-normal text-18">
                                             : {data.value}
                                         </span>
                                     </span>

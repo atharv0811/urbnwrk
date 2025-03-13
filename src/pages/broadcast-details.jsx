@@ -52,7 +52,7 @@ const BroadcastDetails = () => {
             </span>
 
             <div className="d-flex align-items-center justify-content-between">
-                <h5 className="my-2 text-red fw-semibold text-26">BROADCAST DETAILS</h5>
+                <h5 className="my-2 text-red fw-medium text-26">BROADCAST DETAILS</h5>
                 <button className="btn-red fw-normal" style={{ padding: "8px 30px" }}>
                     <Printer size={18} color="#fff" /> Print
                 </button>
@@ -60,7 +60,7 @@ const BroadcastDetails = () => {
 
             <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="mb-3 d-flex align-items-center gap-3">
-                    <span className="fw-semibold">Status Type</span>{" "}
+                    <span className="fw-normal">Status Type : </span>{" "}
                     <div className="dropdown">
                         <button
                             className="btn dropdown-toggle status-dropdown rounded-0"
@@ -94,12 +94,12 @@ const BroadcastDetails = () => {
                     {broadcastDetails.map((data, idx) => (
                         <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
                             <div className="col-6 ">
-                                <label className="text-18 text-secondary2 fw-medium">{data.label}</label>
+                                <label className="text-18 text-secondary2 fw-normal">{data.label}</label>
                             </div>
                             <div className="col-6">
                                 <label className="text">
                                     <span className="me-3">
-                                        <span className="fw-medium text-18">
+                                        <span className="fw-normal text-18">
                                             : {data.value}
                                         </span>
                                     </span>
@@ -134,7 +134,7 @@ const BroadcastDetails = () => {
 
                 <ol>
                     <li>
-                        <span className="fw-semibold">Shubham Khopade</span>
+                        <span className="fw-medium">Shubham Khopade</span>
                     </li>
                 </ol>
             </div>
