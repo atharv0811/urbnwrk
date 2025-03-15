@@ -472,7 +472,7 @@ textarea {
 input:focus {
   outline: none !important;
   box-shadow: none !important;
-  border: 1px solid #b3b2b2 !important;
+  border: 1px solid #b3b2b2;
 }
 
 .custom-switch {
@@ -654,6 +654,10 @@ input[type="radio"]:hover {
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.select__multi-value__remove path {
+  fill: #fff !important;
 }
 
 @media screen and (max-width: 942px) {

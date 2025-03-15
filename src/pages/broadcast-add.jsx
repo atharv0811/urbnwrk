@@ -2,13 +2,14 @@ import { Calendar, InfoIcon } from "lucide-react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Link, useNavigate } from "react-router-dom";
+import MultiSelectBox from "../components/MultiSelectBox";
 
 const AddBroadcast = () => {
     const navigate = useNavigate();
     const [endDate, setEndDate] = useState();
     const [fileNames, setFileNames] = useState("No file chosen");
-    const [selectedOption, setSelectedOption] = useState("");
-    const [showPopup, setShowPopup] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("all");
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -179,6 +180,36 @@ const AddBroadcast = () => {
                             </label>
                         </div>
                     </div>
+
+                    {selectedOption !== "all" && (
+                        <div className="mt-3 w-25">
+                            <label className="fw-medium mb-2" htmlFor="dropdown">
+                                Select {selectedOption === "individuals" ? "Individuals" : "Groups"}
+                            </label>
+                            <MultiSelectBox
+                                options={
+                                    selectedOption === "individuals" ? [
+                                        { label: "User 1", value: "user1" },
+                                        { label: "User 2", value: "user2" },
+                                        { label: "User 3", value: "user3" },
+                                        { label: "User 4", value: "user4" },
+                                        { label: "User 5", value: "user5" },
+                                    ] : [
+                                        { label: "Group 1", value: "group1" },
+                                        { label: "Group 2", value: "group2" },
+                                        { label: "Group 3", value: "group3" },
+                                        { label: "Group 4", value: "group4" },
+                                        { label: "Group 5", value: "group5" },
+                                    ]
+                                }
+                                value={selectedOptions}
+                                onChange={(selectedOptions) => {
+                                    setSelectedOptions(selectedOptions);
+                                }}
+                                placeholder="Select an option"
+                            />
+                        </div>
+                    )}
                 </div>
 
                 <div className="d-flex align-items-center justify-content-center gap-2">
