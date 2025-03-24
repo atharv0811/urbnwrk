@@ -381,7 +381,7 @@ const User = () => {
                 </table>
             </div>
 
-            {pagination.total_pages > 1 && (
+            {totalPages > 1 && (
                 <div className="d-flex justify-content-between align-items-center px-3 mt-3">
                     <ul className="pagination justify-content-center d-flex">
                         {/* First Button */}
@@ -423,7 +423,7 @@ const User = () => {
 
                         {/* Next Button */}
                         <li
-                            className={`page-item ${pagination.current_page === pagination.total_pages
+                            className={`page-item ${pagination.current_page === totalPages
                                 ? "disabled"
                                 : ""
                                 }`}
@@ -431,7 +431,7 @@ const User = () => {
                             <button
                                 className="page-link"
                                 onClick={() => handlePageChange(pagination.current_page + 1)}
-                                disabled={pagination.current_page === pagination.total_pages}
+                                disabled={pagination.current_page === totalPages}
                             >
                                 Next
                             </button>
@@ -439,15 +439,15 @@ const User = () => {
 
                         {/* Last Button */}
                         <li
-                            className={`page-item ${pagination.current_page === pagination.total_pages
+                            className={`page-item ${pagination.current_page === totalPages
                                 ? "disabled"
                                 : ""
                                 }`}
                         >
                             <button
                                 className="page-link"
-                                onClick={() => handlePageChange(pagination.total_pages)}
-                                disabled={pagination.current_page === pagination.total_pages}
+                                onClick={() => handlePageChange(totalPages)}
+                                disabled={pagination.current_page === totalPages}
                             >
                                 Last
                             </button>
