@@ -1,99 +1,33 @@
-import { Link } from "react-router-dom";
-
-const ticketDetails = [
-    {
-        label: "Title",
-        value: "Test",
-    },
-    {
-        label: "Created On",
-        value: "24/01/2025 11:00 AM",
-    },
-    {
-        label: "Ticket Number",
-        value: "1234567890",
-    },
-    {
-        label: "Status",
-        value: "Closed",
-    },
-    {
-        label: "Cateogory",
-        value: "Cleaning Services",
-    },
-    {
-        label: "Admin Priority",
-        value: "P1",
-    },
-    {
-        label: "Subcategory",
-        value: "Common Lobby Area",
-    },
-    {
-        label: "Reference Number",
-        value: "20/01/2025 06:24 PM",
-    },
-];
-
-const creatorDetails = [
-    {
-        label: "Created By",
-        value: "Customer Cred",
-    },
-    {
-        label: "Department",
-        value: "Admin",
-    },
-    {
-        label: "Site",
-        value: "Panchashil Test",
-    },
-    {
-        label: "Unit",
-        value: "Closed",
-    },
-];
-
-const locationDetails = [
-    {
-        label: "Region",
-        value: "Panchashil Test",
-    },
-    {
-        label: "Zone",
-        value: "Admin",
-    },
-    {
-        label: "City",
-        value: "Panchashil Test",
-    },
-    {
-        label: "District",
-        value: "Panchashil Test",
-    },
-    {
-        label: "State",
-        value: "Panchashil Test",
-    },
-    {
-        label: "Address",
-        value: "Panchashil Test",
-    },
-    {
-        label: "Building",
-        value: "Panchashil Test",
-    },
-    {
-        label: "Floor",
-        value: "Panchashil Test",
-    },
-    {
-        label: "Room",
-        value: "Panchashil Test",
-    },
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 const TicketsDetails = () => {
+    const { id } = useParams();
+    const [ticketDetails, setTicketDetails] = useState({})
+
+    const token = localStorage.getItem("access_token");
+
+    const fetchTicketDetails = async () => {
+        try {
+            const response = await axios.get(`https://app.gophygital.work/pms/complaints/${id}.json`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(response.data)
+            setTicketDetails(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    console.log(ticketDetails)
+
+    useEffect(() => {
+        fetchTicketDetails();
+    }, []);
+
     return (
         <>
             <span className="text-secondary text-18 fw-medium">
@@ -107,27 +41,158 @@ const TicketsDetails = () => {
 
             <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
-                    {ticketDetails.map((data, idx) => (
-                        <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
-                            <div className="col-6 ">
-                                <label
-                                    className="text-18 fw-normal"
-                                    style={{ color: "rgba(26, 26, 26, 0.54)" }}
-                                >
-                                    {data.label}
-                                </label>
-                            </div>
-                            <div className="col-6">
-                                <label className="text">
-                                    <span className="me-3">
-                                        <span className="text-dark fw-normal text-18">
-                                            : {data.value}
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Title
+                            </label>
                         </div>
-                    ))}
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.heading}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Created On
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {(ticketDetails.created_at)?.split("T")[0]}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Ticket No.
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.ticket_number}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Status
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.issue_status}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Category
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.category_type}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Admin Priority
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.priority}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Subcategory
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.sub_category_type}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Reference Number
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.reference_number}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -137,27 +202,82 @@ const TicketsDetails = () => {
 
             <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
-                    {creatorDetails.map((data, idx) => (
-                        <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
-                            <div className="col-6 ">
-                                <label
-                                    className="text-18 fw-normal"
-                                    style={{ color: "rgba(26, 26, 26, 0.54)" }}
-                                >
-                                    {data.label}
-                                </label>
-                            </div>
-                            <div className="col-6">
-                                <label className="text">
-                                    <span className="me-3">
-                                        <span className="text-dark fw-normal text-18">
-                                            : {data.value}
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Created By
+                            </label>
                         </div>
-                    ))}
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.updated_by}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Department
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.department_name}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Site
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.site_name}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Unit
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.unit_name}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -167,27 +287,177 @@ const TicketsDetails = () => {
 
             <div className="card bg-card3 card-shadow my-4 p-3">
                 <div className="row px-3">
-                    {locationDetails.map((data, idx) => (
-                        <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
-                            <div className="col-6 ">
-                                <label
-                                    className="text-18 fw-normal"
-                                    style={{ color: "rgba(26, 26, 26, 0.54)" }}
-                                >
-                                    {data.label}
-                                </label>
-                            </div>
-                            <div className="col-6">
-                                <label className="text">
-                                    <span className="me-3">
-                                        <span className="text-dark fw-normal text-18">
-                                            : {data.value}
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Region
+                            </label>
                         </div>
-                    ))}
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.region}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Zone
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.zone}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                City
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.city}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                District
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.district}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                State
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.state}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Address
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.address}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Building
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.building_name}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Floor
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.floor_name}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label
+                                className="text-18 fw-normal"
+                                style={{ color: "rgba(26, 26, 26, 0.54)" }}
+                            >
+                                Room
+                            </label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="text-dark fw-normal text-18">
+                                        : {ticketDetails.room_name}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -210,7 +480,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.assigned_to}
                                     </span>
                                 </span>
                             </label>
@@ -229,7 +499,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.external_priority}
                                     </span>
                                 </span>
                             </label>
@@ -248,7 +518,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.proactive_reactive}
                                     </span>
                                 </span>
                             </label>
@@ -267,7 +537,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.review_tracking}
                                     </span>
                                 </span>
                             </label>
@@ -286,7 +556,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.service_type}
                                     </span>
                                 </span>
                             </label>
@@ -305,7 +575,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.corrective_action}
                                     </span>
                                 </span>
                             </label>
@@ -324,7 +594,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.complaint_mode}
                                     </span>
                                 </span>
                             </label>
@@ -343,7 +613,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.preventive_action}
                                     </span>
                                 </span>
                             </label>
@@ -362,7 +632,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.responsible_person}
                                     </span>
                                 </span>
                             </label>
@@ -381,7 +651,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.impact}
                                     </span>
                                 </span>
                             </label>
@@ -400,7 +670,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.correction}
                                     </span>
                                 </span>
                             </label>
@@ -419,7 +689,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.root_cause}
                                     </span>
                                 </span>
                             </label>
@@ -438,7 +708,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.asset_service}
                                     </span>
                                 </span>
                             </label>
@@ -457,7 +727,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.task_id}
                                     </span>
                                 </span>
                             </label>
@@ -476,7 +746,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.service_location}
                                     </span>
                                 </span>
                             </label>
@@ -495,7 +765,7 @@ const TicketsDetails = () => {
                             <label className="text">
                                 <span className="me-3">
                                     <span className="text-dark fw-normal text-18">
-                                        : Customer Cred
+                                        : {ticketDetails.notes}
                                     </span>
                                 </span>
                             </label>
@@ -510,7 +780,9 @@ const TicketsDetails = () => {
 
             <div className="card card-shadow bg-card3 p-3 my-4">
                 <div>
-                    <img src="/image.png" alt="" className="rounded-2" />
+                    {ticketDetails.documents?.length > 0 && (
+                        <img src={ticketDetails.documents[0].document} alt="" className="rounded-2 w-25" />
+                    )}
                 </div>
             </div>
         </>

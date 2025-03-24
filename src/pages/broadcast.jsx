@@ -1,93 +1,73 @@
+import axios from "axios";
 import { Eye, Search, SlidersHorizontal } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-const tableData = [
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-    {
-        title: "Test",
-        type: "Personal",
-        createdOn: "17/09/2024",
-        createdBy: "Shubham Khopade",
-        status: "Published",
-        expiredOn: "30/09/2024",
-        expired: "Yes",
-        attachment: null,
-    },
-];
 
 const Broadcats = () => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
+    const [broadcasts, setBroadcasts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [pagination, setPagination] = useState({
+        current_page: 1,
+        total_count: 0,
+        total_pages: 0,
+    });
+    const pageSize = 10;
+
+    const token = localStorage.getItem("access_token");
+
+    const fetchBroadcasts = async () => {
+        setLoading(true)
+        try {
+            const response = await axios.get(`https://app.gophygital.work/pms/admin/noticeboards.json`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            setBroadcasts(response.data.noticeboards)
+            setPagination((prev) => ({
+                ...prev,
+                total_count: response.data.noticeboards.length,
+                total_pages: Math.ceil(
+                    response.data.noticeboards.length / pageSize
+                ),
+            }));
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    };
+
+    useEffect(() => {
+        fetchBroadcasts();
+    }, []);
+
+    const handlePageChange = (page) => {
+        setPagination((prev) => ({ ...prev, current_page: page }));
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+        setPagination((prev) => ({ ...prev, current_page: 1 }));
+    }
+
+    const searchedData = broadcasts.filter((ticket) =>
+        ticket.notice_heading.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+
+    const totalFiltered = searchedData.length;
+    const totalPages = Math.ceil(totalFiltered / pageSize);
+
+    const tableData = searchedData
+        .slice(
+            (pagination.current_page - 1) * pageSize,
+            pagination.current_page * pageSize
+        )
+        .sort((a, b) => (a.id || 0) - (b.id || 0));
+
+    console.log(broadcasts)
 
     return (
         <>
@@ -106,7 +86,7 @@ const Broadcats = () => {
                         <input
                             type="text"
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={handleSearchChange}
                             placeholder="Search"
                             className="form-control rounded-0 text-secondary"
                             style={{ padding: "8px 3px 8px 30px", width: "230px" }}
@@ -162,30 +142,131 @@ const Broadcats = () => {
                         </tr>
                     </thead>
                     <tbody className="text-nowrap">
-                        {tableData.map((data, idx) => (
-                            <tr key={idx}>
-                                <td className="text-center">
-                                    <Eye
-                                        size={20}
-                                        style={{ cursor: "pointer" }}
-                                        onClick={() => {
-                                            navigate(`/broadcast/${idx}`);
-                                        }}
-                                    />
-                                </td>
-                                <td>{data.title}</td>
-                                <td>{data.type}</td>
-                                <td>{data.createdOn}</td>
-                                <td>{data.createdBy}</td>
-                                <td>{data.status}</td>
-                                <td>{data.expiredOn}</td>
-                                <td>{data.expired}</td>
-                                <td>{data.attachment}</td>
-                            </tr>
-                        ))}
+                        {
+                            loading ? (
+                                <tr>
+                                    <td colSpan="9">Loading...</td>
+                                </tr>
+                            ) : (
+                                tableData.map((data) => (
+                                    <tr key={data.id}>
+                                        <td className="text-center">
+                                            <Eye
+                                                size={20}
+                                                style={{ cursor: "pointer" }}
+                                                onClick={() => {
+                                                    navigate(`/broadcast/${data.id}`);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>{data.notice_heading}</td>
+                                        <td>{data.shared === 1 ? "Personal" : "General"}</td>
+                                        <td>{(data.created_at)?.split("T")[0]}</td>
+                                        <td>{data.created_by}</td>
+                                        <td>{data.status}</td>
+                                        <td>{(data.expire_time)?.split("T")[0]}</td>
+                                        <td>{data.is_expired ? "Yes" : "No"}</td> {/* Replace with actual expiration status */}
+                                        <td><img src={data.attachments[0]?.document_url} alt="" style={{ width: "100%", height: "50px" }} /></td>
+                                    </tr>
+                                ))
+                            )}
                     </tbody>
                 </table>
             </div>
+
+            {
+                pagination.total_pages > 1 && (
+                    <div className="d-flex justify-content-between align-items-center px-3 mt-3">
+                        <ul className="pagination justify-content-center d-flex">
+                            {/* First Button */}
+                            <li
+                                className={`page-item ${pagination.current_page === 1 ? "disabled" : ""
+                                    }`}
+                            >
+                                <button className="page-link" onClick={() => handlePageChange(1)}>
+                                    First
+                                </button>
+                            </li>
+
+                            {/* Previous Button */}
+                            <li
+                                className={`page-item ${pagination.current_page === 1 ? "disabled" : ""
+                                    }`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() => handlePageChange(pagination.current_page - 1)}
+                                    disabled={pagination.current_page === 1}
+                                >
+                                    Prev
+                                </button>
+                            </li>
+
+                            {Array.from({ length: totalPages }, (_, index) => index + 1)
+                                .filter((page) => page === 1 || page === totalPages || (page >= pagination.current_page - 1 && page <= pagination.current_page + 1))
+                                .map((page, index, array) => (
+                                    <>
+                                        {index > 0 && page !== array[index - 1] + 1 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+                                        <li key={page} className={`page-item ${pagination.current_page === page ? "active" : ""}`}>
+                                            <button className="page-link" onClick={() => handlePageChange(page)}>
+                                                {page}
+                                            </button>
+                                        </li>
+                                    </>
+                                ))}
+
+                            {/* Next Button */}
+                            <li
+                                className={`page-item ${pagination.current_page === pagination.total_pages
+                                    ? "disabled"
+                                    : ""
+                                    }`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() => handlePageChange(pagination.current_page + 1)}
+                                    disabled={pagination.current_page === pagination.total_pages}
+                                >
+                                    Next
+                                </button>
+                            </li>
+
+                            {/* Last Button */}
+                            <li
+                                className={`page-item ${pagination.current_page === pagination.total_pages
+                                    ? "disabled"
+                                    : ""
+                                    }`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() => handlePageChange(pagination.total_pages)}
+                                    disabled={pagination.current_page === pagination.total_pages}
+                                >
+                                    Last
+                                </button>
+                            </li>
+                        </ul>
+
+                        {/* Showing entries count */}
+                        <div>
+                            <p>
+                                Showing{" "}
+                                {Math.min(
+                                    (pagination.current_page - 1) * pageSize + 1 || 1,
+                                    pagination.total_count
+                                )}{" "}
+                                to{" "}
+                                {Math.min(
+                                    pagination.current_page * pageSize,
+                                    pagination.total_count
+                                )}{" "}
+                                of {pagination.total_count} entries
+                            </p>
+                        </div>
+                    </div>
+                )
+            }
         </>
     );
 };

@@ -1,45 +1,66 @@
+import axios from "axios";
 import { Printer } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
-const broadcastDetails = [
-    {
-        label: "Status",
-        value: "Personal",
-    },
-    {
-        label: "Created On",
-        value: "17/09/2024 - 9:46 AM",
-    },
-    {
-        label: "End Date & Time",
-        value: "30/09/2024 - 12:00 PM",
-    }
-];
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 const statusOptions = [
-    { value: "Published", label: "Publish", color: "green" },
-    { value: "Expired", label: "Expire", color: "red" },
-    { value: "Disabled", label: "Disable", color: "gray" },
+    { value: "Disable", label: "Disable", color: "gray" },
 ];
 
+const statusBgColors = {
+    Published: "#3A8E5C",
+    Disable: "#D5DBDB"
+};
+
+const statusTextColors = {
+    Published: "white",
+    Disable: "black"
+};
+
 const BroadcastDetails = () => {
-    const [selectedStatus, setSelectedStatus] = useState("Published");
+    const { id } = useParams();
 
-    const handleStatusChange = (status) => {
-        setSelectedStatus(status);
+    const [broadcastDetails, setBroadcastDetails] = useState({});
+    const [selectedStatus, setSelectedStatus] = useState();
+
+    const token = localStorage.getItem("access_token");
+
+    const fetchDetails = async () => {
+        try {
+            const response = await axios.get(`https://app.gophygital.work/pms/admin/noticeboards/${id}.json`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(response)
+            setBroadcastDetails(response.data)
+            setSelectedStatus(response.data.status)
+        } catch (error) {
+            console.log(error)
+        }
     };
+    console.log(selectedStatus)
 
-    const statusBgColors = {
-        Published: "#3A8E5C",
-        Expired: "#B71C1C",
-        Disabled: "#D5DBDB"
-    };
+    useEffect(() => {
+        fetchDetails();
+    }, [])
 
-    const statusTextColors = {
-        Published: "white",
-        Expired: "white",
-        Disabled: "black"
+    const handleStatusChange = async (status) => {
+        const newStatus = status === 'Published' ? 1 : 2
+        try {
+            await axios.put(`https://app.gophygital.work/pms/admin/noticeboards/${id}.json`, {
+                "noticeboard": {
+                    "publish": newStatus
+                }
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            setSelectedStatus(status);
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     return (
@@ -72,6 +93,7 @@ const BroadcastDetails = () => {
                                 backgroundColor: statusBgColors[selectedStatus],
                                 color: statusTextColors[selectedStatus],
                             }}
+                            disabled={selectedStatus === "Disable"}
                         >
                             {selectedStatus}
                         </button>
@@ -91,22 +113,62 @@ const BroadcastDetails = () => {
                     </div>
                 </div>
                 <div className="row px-3">
-                    {broadcastDetails.map((data, idx) => (
-                        <div key={idx} className="col-lg-6 col-sm-12 row px-2 my-2 ">
-                            <div className="col-6 ">
-                                <label className="text-18 text-secondary2 fw-normal">{data.label}</label>
-                            </div>
-                            <div className="col-6">
-                                <label className="text">
-                                    <span className="me-3">
-                                        <span className="fw-normal text-18">
-                                            : {data.value}
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label className="text-18 text-secondary2 fw-normal">Status</label>
                         </div>
-                    ))}
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="fw-normal text-18">
+                                        : {broadcastDetails.shared === 1 ? "Personal" : "General"}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label className="text-18 text-secondary2 fw-normal">Created On</label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="fw-normal text-18">
+                                        : {(broadcastDetails.created_at)?.split("T")[0]}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-12 row px-2 my-2 ">
+                        <div className="col-6 ">
+                            <label className="text-18 text-secondary2 fw-normal">End Date & Time</label>
+                        </div>
+                        <div className="col-6">
+                            <label className="text">
+                                <span className="me-3">
+                                    <span className="fw-normal text-18">
+                                        : {broadcastDetails.expire_time
+                                            ? (() => {
+                                                const dateObj = new Date(broadcastDetails.expire_time);
+                                                const date = dateObj.toISOString().split("T")[0]; // YYYY-MM-DD
+
+                                                // Convert time to 12-hour format
+                                                const hours = dateObj.getHours();
+                                                const minutes = dateObj.getMinutes().toString().padStart(2, "0");
+                                                const ampm = hours >= 12 ? "PM" : "AM";
+                                                const formattedHours = hours % 12 || 12; // Convert 24-hour to 12-hour format
+                                                const time = `${formattedHours}:${minutes} ${ampm}`;
+
+                                                return `${date} ${time}`;
+                                            })()
+                                            : "N/A"}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -115,7 +177,7 @@ const BroadcastDetails = () => {
                 <span className="divider-horizontal"></span>
 
                 <p className="text-18 fw-normal">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda nihil in laboriosam. Quos labore velit vero? Aliquam, incidunt laudantium.
+                    {broadcastDetails.notice_text}
                 </p>
             </div>
 
@@ -124,7 +186,11 @@ const BroadcastDetails = () => {
                 <span className="divider-horizontal"></span>
 
                 <div>
-                    <img src="/logo.jpg" alt="" className="rounded-2" />
+                    {
+                        broadcastDetails.attachments?.length > 0 && (
+                            <img src={broadcastDetails?.attachments[0]?.document_url} alt="" className="rounded-2 w-25" />
+
+                        )}
                 </div>
             </div>
 
@@ -133,9 +199,14 @@ const BroadcastDetails = () => {
                 <span className="divider-horizontal"></span>
 
                 <ol>
-                    <li>
-                        <span className="fw-medium">Shubham Khopade</span>
-                    </li>
+                    {
+                        broadcastDetails.shared_notices?.map(((data, idx) => (
+                            <li key={idx}>
+                                <span className="fw-medium">{data}</span>
+                            </li>
+                        )))
+                    }
+
                 </ol>
             </div>
 

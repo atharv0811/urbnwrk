@@ -1,34 +1,137 @@
+import axios from "axios";
 import { Calendar, InfoIcon } from "lucide-react";
-import { useState } from "react";
-import DatePicker from "react-datepicker";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import MultiSelectBox from "../components/MultiSelectBox";
+import toast from "react-hot-toast";
 
 const AddEvent = () => {
     const navigate = useNavigate();
 
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
-    const [isChecked, setIsChecked] = useState(false);
+    const [startTime, setStartTime] = useState("");
+    const [endTime, setEndTime] = useState("");
+    const [isRSVPChecked, setIsRSVPChecked] = useState(false);
     const [selectedOption, setSelectedOption] = useState("all");
+    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [selectedGroups, setSelectedGroups] = useState();
+    const [users, setUsers] = useState([]);
     const [isImportant, setIsImportant] = useState(false);
     const [sendEmail, setSendEmail] = useState(false);
     const [fileNames, setFileNames] = useState("No file chosen");
+    const [attachments, setAttachments] = useState([]);
+    const [formData, setFormData] = useState({
+        title: "",
+        venue: "",
+        start_datetime: null,
+        end_datetime: null,
+        description: "",
+        rsvp: false,
+        share_with: "all",
+        is_important: false,
+        send_email: false,
+        attachments: [],
+    })
+
+    const token = localStorage.getItem("access_token");
+
+    const fetchIndividuals = async () => {
+        try {
+            const response = await axios.get(
+                `https://app.gophygital.work/pms/users/occupant_users_with_entity.json`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+
+            console.log(response.data.occupant_users)
+            setUsers(response.data.occupant_users)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        if (selectedOption === "individuals") {
+            fetchIndividuals();
+        }
+    }, [selectedOption]);
+
+    const formatDateTime = (date, time) => {
+        if (!date || !time) return null; // Avoid errors if either is missing
+
+        const formattedDate = date.toISOString().split("T")[0]; // Extracts YYYY-MM-DD
+        return `${formattedDate}T${time}`; // Combines with HH:mm
+    };
+
+    useEffect(() => {
+        setFormData((prevData) => ({
+            ...prevData,
+            start_datetime: formatDateTime(startDate, startTime),
+            end_datetime: formatDateTime(endDate, endTime),
+            rsvp: isRSVPChecked ? 1 : 0,
+            share_with: selectedOption === "all" ? 2 : 1,
+            is_important: isImportant,
+            send_email: sendEmail,
+            attachments: attachments,
+        }));
+    }, [startDate, endDate, isRSVPChecked, selectedOption, isImportant, sendEmail, attachments]);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
-        if (files.length > 0) {
-            const fileList = Array.from(files)
-                .map((file) => file.name)
-                .join(", ");
-            setFileNames(fileList);
-        } else {
-            setFileNames("No file chosen");
-        }
+        setFileNames(files.length > 0 ? Array.from(files).map((file) => file.name).join(", ") : "No file chosen");
+        setAttachments(Array.from(files));
     };
 
-    const handleToggle = () => {
-        setIsChecked(!isChecked);
-    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formDataToSend = new FormData();
+
+        formDataToSend.append('event[event_name]', formData.title);
+        formDataToSend.append("event[event_at]", formData.venue);
+        formDataToSend.append("event[from_time]", formData.start_datetime);
+        formDataToSend.append("event[to_time]", formData.end_datetime);
+        formDataToSend.append("event[description]", formData.description);
+        formDataToSend.append("event[rsvp_action]", formData.rsvp);
+        formDataToSend.append("event[shared]", formData.share_with);
+        formDataToSend.append("event[is_important]", formData.is_important);
+        formDataToSend.append("event[email_trigger_enabled]", formData.send_email);
+
+        if (formData.share_with === 1) {
+            formDataToSend.append("event[swusers][]", JSON.stringify(selectedUsers.map(user => user.value)));
+        }
+
+        attachments.forEach((file) => {
+            formDataToSend.append("noticeboard[files_attached][]", file);
+        })
+
+        console.log("FormData contents:");
+        for (let pair of formDataToSend.entries()) {
+            console.log(pair[0] + ": ", pair[1]);
+        }
+
+        try {
+            const response = await axios.post(`https://app.gophygital.work/pms/admin/events.json`, formDataToSend, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+            console.log(response)
+            if (response.status === 200) {
+                toast.success("Event added successfully")
+                navigate("/events")
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error("Failed to add event")
+        }
+    }
 
     return (
         <>
@@ -41,7 +144,7 @@ const AddEvent = () => {
 
             <h5 className="my-2 text-red fw-semibold text-26">NEW EVENT</h5>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="card card-shadow bg-card3 p-3 my-4">
                     <span className="fw-medium">EVENT INFORMATION</span>
                     <span className="divider-horizontal"></span>
@@ -59,6 +162,8 @@ const AddEvent = () => {
                                     type="text"
                                     className="bg-label w-100"
                                     style={{ padding: "8px" }}
+                                    value={formData.title}
+                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -74,6 +179,8 @@ const AddEvent = () => {
                                     type="text"
                                     className="bg-label w-100"
                                     style={{ padding: "8px" }}
+                                    value={formData.venue}
+                                    onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -136,6 +243,8 @@ const AddEvent = () => {
                                     type="time"
                                     className="bg-label w-100"
                                     style={{ padding: "8px" }}
+                                    value={startTime}
+                                    onChange={(e) => setStartTime(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -151,6 +260,8 @@ const AddEvent = () => {
                                     type="time"
                                     className="bg-label w-100"
                                     style={{ padding: "8px" }}
+                                    value={endTime}
+                                    onChange={(e) => setEndTime(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -166,6 +277,8 @@ const AddEvent = () => {
                                     rows={1}
                                     className="bg-label w-100"
                                     style={{ padding: "8px" }}
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -182,8 +295,8 @@ const AddEvent = () => {
                                         type="checkbox"
                                         role="switch"
                                         id="toggleSwitch"
-                                        checked={isChecked}
-                                        onChange={handleToggle}
+                                        checked={isRSVPChecked}
+                                        onChange={() => setIsRSVPChecked(!isRSVPChecked)}
                                         style={{ cursor: "pointer" }}
                                     />
                                 </div>
@@ -237,6 +350,37 @@ const AddEvent = () => {
                                     </label>
                                 </div>
                             </div>
+                            {selectedOption !== "all" && (
+                                <div className="mt-3">
+                                    <label className="fw-medium mb-2" htmlFor="dropdown">
+                                        Select {selectedOption === "individuals" ? "Individuals" : "Groups"}
+                                    </label>
+                                    {
+                                        selectedOption === "individuals" ? (
+                                            <MultiSelectBox
+                                                options={
+                                                    users.map(user => ({
+                                                        value: user.id,
+                                                        label: `${user.firstname}  ${user.lastname}`
+                                                    }))
+                                                }
+                                                value={selectedUsers}
+                                                onChange={(selectedUser) => {
+                                                    setSelectedUsers(selectedUser);
+                                                }}
+                                                placeholder="Select Users"
+                                            />
+                                        ) : (<MultiSelectBox
+                                            options={[]}
+                                            value={selectedGroups}
+                                            onChange={(selectedGroup) => {
+                                                setSelectedGroups(selectedGroup);
+                                            }}
+                                            placeholder="Select Groups"
+                                        />)
+                                    }
+                                </div>
+                            )}
                         </div>
                     </div>
 

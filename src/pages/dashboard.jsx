@@ -1,7 +1,8 @@
-import { ArrowUp, Calendar, Clock, Download, Wallet } from "lucide-react";
-import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import { ArrowUp, Calendar, Download, Wallet } from "lucide-react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import axios from "axios";
 import {
     PieChart,
     Pie,
@@ -15,117 +16,52 @@ import {
     Line,
     LabelList,
 } from "recharts";
-
-const weeklyGraphData = [
-    { day: "Monday", amount: 4000, change: 0 },
-    { day: "Tuesday", amount: 8500, change: 400 },
-    { day: "Wednesday", amount: 3200, change: -440 },
-    { day: "Thursday", amount: 7200, change: 300 },
-    { day: "Friday", amount: 9800, change: 350 },
-    { day: "Saturday", amount: 3600, change: -450 },
-    { day: "Sunday", amount: 9700, change: 400 },
-];
-
-const monthlyGraphData = [
-    { name: "Week 1", amount: 5000, change: 0 },
-    { name: "Week 2", amount: 9000, change: 4000 },
-    { name: "Week 3", amount: 4600, change: -4400 },
-    { name: "Week 4", amount: 8100, change: 3500 },
-    { name: "Week 5", amount: 3600, change: -4500 },
-];
-
-const data = [
-    { name: "Pending Tickets", value: 20, color: "#F4C08D" }, // Light Orange
-    { name: "Closed Tickets", value: 80, color: "#C4B79A" }, // Light Brown
-];
-
-const userData = {
-    Pending: [
-        { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
-        { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
-        { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
-        { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
-        { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
-        { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
-        { name: "Shubh J", email: "shubhjj@gmail.com", status: "Pending" },
-        { name: "Abdul G", email: "abdulgfr@gmail.com", status: "Pending" },
-    ],
-    Rejected: [
-        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
-        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
-        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
-        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
-        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
-        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
-        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
-        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
-        { name: "John D", email: "johnd@gmail.com", status: "Rejected" },
-        { name: "Alice B", email: "aliceb@gmail.com", status: "Rejected" },
-    ],
-    Accepted: [
-        { name: "Mike K", email: "mikek@gmail.com", status: "Approved" },
-        { name: "Emma W", email: "emmaw@gmail.com", status: "Approved" },
-        { name: "Mike K", email: "mikek@gmail.com", status: "Approved" },
-        { name: "Emma W", email: "emmaw@gmail.com", status: "Approved" },
-        { name: "Mike K", email: "mikek@gmail.com", status: "Approved" },
-        { name: "Emma W", email: "emmaw@gmail.com", status: "Approved" },
-        { name: "Mike K", email: "mikek@gmail.com", status: "Approved" },
-        { name: "Emma W", email: "emmaw@gmail.com", status: "Approved" },
-    ],
-};
+import { format } from "date-fns";
 
 const statusOptions = [
-    { value: "Approved", label: "Approve", color: "green" },
-    { value: "Rejected", label: "Reject", color: "red" },
+    { value: "approved", label: "Approve", color: "green" },
+    { value: "rejected", label: "Reject", color: "red" },
 ];
 
-const CustomLegend = () => (
-    <div className="custom-legend">
-        <p className="total-tickets">
-            <span className="text-red text-18">
-                Total Tickets : <span className="fw-semibold">100</span>
-            </span>
-        </p>
-        <div className="legend-item">
-            <span
-                className="legend-box"
-                style={{ backgroundColor: data[0].color }}
-            ></span>
-            <span>Pending Tickets</span>
-        </div>
-        <div className="legend-item">
-            <span
-                className="legend-box"
-                style={{ backgroundColor: data[1].color }}
-            ></span>
-            <span>Closed Tickets</span>
-        </div>
-    </div>
-);
+const statusBgColors = {
+    approved: "#3A8E5C",
+    rejected: "#B71C1C",
+    pending: "#F9A825",
+};
+
+const statusTextColors = {
+    approved: "white",
+    rejected: "white",
+    pending: "black",
+};
 
 const Dashboard = () => {
-    const statusBgColors = {
-        Approved: "#3A8E5C",
-        Rejected: "#B71C1C",
-        Pending: "#F9A825"
-    };
-
-    const statusTextColors = {
-        Approved: "white",
-        Rejected: "white",
-        Pending: "black"
-    };
-
     const today = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
+    const lastWeek = new Date();
+    lastWeek.setDate(today.getDate() - 7);
 
-    const [startDate, setStartDate] = useState(today);
-    const [endDate, setEndDate] = useState(tomorrow);
+    const [startDate, setStartDate] = useState(lastWeek);
+    const [endDate, setEndDate] = useState(today);
     const [activeTab, setActiveTab] = useState("Pending");
     const [selectedStatus, setSelectedStatus] = useState({});
     const [graphActiveTab, setGraphActiveTab] = useState("weekly");
     const [greeting, setGreeting] = useState("");
+    const [currentUser, setCurrentUser] = useState({})
+    const [wallet, setWallet] = useState({});
+    const [pieChartData, setPieChartData] = useState([
+        { name: "Pending Tickets", value: 0, color: "#F4C08D" },
+        { name: "Closed Tickets", value: 0, color: "#C4B79A" }
+    ])
+    const [weeklyGraphData, setWeeklyGraphData] = useState([])
+    const [monthlyGraphData, setMonthlyGraphData] = useState([])
+    const [totalTickets, setTotalTickets] = useState(0)
+    const [userData, setUserData] = useState({
+        Pending: [],
+        Rejected: [],
+        Accepted: [],
+    })
+
+    const token = localStorage.getItem("access_token");
 
     useEffect(() => {
         const getGreeting = () => {
@@ -142,21 +78,176 @@ const Dashboard = () => {
         setGreeting(getGreeting());
     }, []);
 
+    const fetchCurrentUser = async () => {
+        try {
+            const response = await axios.get(`https://app.gophygital.work/pms/get_user_detail.json`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setCurrentUser(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const fetchWallet = async () => {
+        try {
+            const response = await axios.get(
+                `https://app.gophygital.work/pms/facilty_bookings/get_wallet_data.json`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setWallet(response.data?.wallet)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get(`https://app.gophygital.work/pms/users/occupant_users_with_entity.json`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            const pendingUsers = response.data?.occupant_users?.filter(user => user?.lock_user_permission?.status === 'pending');
+            const approvedUsers = response.data?.occupant_users?.filter(user => user?.lock_user_permission?.status === 'approved');
+            const rejectedUsers = response.data?.occupant_users?.filter(user => user?.lock_user_permission?.status === 'rejected');
+
+            setUserData({
+                Pending: pendingUsers || [],
+                Accepted: approvedUsers || [],
+                Rejected: rejectedUsers || [],
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleStatusChange = async (id, status, index) => {
+        try {
+            await axios.put(
+                `https://app.gophygital.work/pms/users/status_update.json?id=${id}&status=${status}`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setSelectedStatus((prev) => ({ ...prev, [index]: status }));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const filterTickets = async () => {
+        const formatedStartDate = format(startDate, "MM/dd/yyyy");
+        const formatedLastDate = format(endDate, "MM/dd/yyyy")
+
+        try {
+            const response = await axios.get(`https://app.gophygital.work/pms/admin/complaints.json?q[date_range]=${formatedStartDate} - ${formatedLastDate}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log(response)
+
+            if (response.data && response.data?.complaints) {
+                const complaints = response.data.complaints;
+                setTotalTickets(complaints.length)
+
+                // Count pending and closed tickets
+                const pendingTickets = complaints.filter(ticket => ticket.issue_status === "Pending").length;
+                const closedTickets = complaints.filter(ticket => ticket.issue_status === "Completed").length;
+
+                setPieChartData([
+                    { name: "Pending Tickets", value: pendingTickets, color: "#F4C08D" },
+                    { name: "Closed Tickets", value: closedTickets, color: "#C4B79A" }
+                ]);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const CustomLegend = () => (
+        <div className="custom-legend">
+            <p className="total-tickets">
+                <span className="text-red text-18">
+                    Total Tickets : <span className="fw-semibold">{totalTickets}</span>
+                </span>
+            </p>
+            <div className="legend-item">
+                <span
+                    className="legend-box"
+                    style={{ backgroundColor: pieChartData[0].color }}
+                ></span>
+                <span>Pending Tickets</span>
+            </div>
+            <div className="legend-item">
+                <span
+                    className="legend-box"
+                    style={{ backgroundColor: pieChartData[1].color }}
+                ></span>
+                <span>Closed Tickets</span>
+            </div>
+        </div>
+    );
+
+    const fetchGraphData = async () => {
+        try {
+            const response = await axios.get(`https://app.gophygital.work/uwdashboard.json`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log(response.data)
+            setWeeklyGraphData(response.data.weekly_data)
+            setMonthlyGraphData(response.data.monthly_data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchCurrentUser();
+        fetchWallet();
+        fetchUsers();
+        filterTickets();
+        fetchGraphData();
+    }, [])
+
     const graphData =
         graphActiveTab === "weekly" ? weeklyGraphData : monthlyGraphData;
 
-    const handleStatusChange = (index, status) => {
-        setSelectedStatus((prev) => ({ ...prev, [index]: status }));
-    };
-
     const RADIAN = Math.PI / 180;
-    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    const renderCustomizedLabel = ({
+        cx,
+        cy,
+        midAngle,
+        innerRadius,
+        outerRadius,
+        percent,
+        index,
+    }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
         return (
-            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+            <text
+                x={x}
+                y={y}
+                fill="white"
+                textAnchor={x > cx ? "start" : "end"}
+                dominantBaseline="central"
+            >
                 {`${(percent * 100).toFixed(0)}%`}
             </text>
         );
@@ -173,11 +264,14 @@ const Dashboard = () => {
                     </i>
                 </div>
                 <div className="d-flex align-items-center right">
-                    AQI<span>32</span>Good
+                    AQI<span>{currentUser.aqi_value}</span>{currentUser.aqi_category}
                 </div>
             </div>
 
-            <div className="d-flex flex-column flex-lg-row justify-content-between my-4" style={{ gap: "2.2rem" }}>
+            <div
+                className="d-flex flex-column flex-lg-row justify-content-between my-4"
+                style={{ gap: "2.2rem" }}
+            >
                 <div className="card dashboard-card2 d-flex flex-row align-items-center">
                     <div className="d-flex flex-column align-items-center text-24">
                         <span className="fw-semibold">30</span>
@@ -206,7 +300,10 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="d-flex flex-column flex-xl-row justify-content-between my-4" style={{ gap: "2.2rem" }}>
+            <div
+                className="d-flex flex-column flex-xl-row justify-content-between my-4"
+                style={{ gap: "2.2rem" }}
+            >
                 <div className="card card-shadow p-3" style={{ height: "470px" }}>
                     <div className="d-flex flex-row align-items-center justify-content-between">
                         <span className="fw-medium text-20">Tickets</span>
@@ -219,7 +316,7 @@ const Dashboard = () => {
                                     selectsStart
                                     startDate={startDate}
                                     endDate={endDate}
-                                    dateFormat="dd/MM/yyyy"
+                                    dateFormat="MM/dd/yyyy"
                                     className="form-control date-input rounded-0"
                                 />
                             </div>
@@ -232,11 +329,11 @@ const Dashboard = () => {
                                     selectsEnd
                                     startDate={startDate}
                                     endDate={endDate}
-                                    dateFormat="dd/MM/yyyy"
+                                    dateFormat="MM/dd/yyyy"
                                     className="form-control date-input rounded-0"
                                 />
                             </div>
-                            <button className="btn-red" style={{ padding: "7px 10px" }}>
+                            <button className="btn-red" style={{ padding: "7px 10px" }} onClick={filterTickets}>
                                 <ArrowUp size={20} color="#fff" />
                             </button>
                             <button className="btn-red" style={{ padding: "7px 10px" }}>
@@ -250,7 +347,7 @@ const Dashboard = () => {
                     <div className="chart-container">
                         <PieChart width={315} height={315}>
                             <Pie
-                                data={data}
+                                data={pieChartData}
                                 cx="50%"
                                 cy="50%"
                                 label={renderCustomizedLabel}
@@ -259,7 +356,7 @@ const Dashboard = () => {
                                 labelLine={false}
                                 isAnimationActive={true}
                             >
-                                {data.map((entry, index) => (
+                                {pieChartData.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={entry.color} />
                                 ))}
                             </Pie>
@@ -281,7 +378,7 @@ const Dashboard = () => {
                                 key={tab}
                                 className={`${activeTab === tab ? "btn-red" : "btn rounded-0"
                                     } px-2 w-100 fw-medium`}
-                                style={{ fontSize: "16px", height: "50px" }}
+                                style={{ fontSize: "15px", height: "50px" }}
                                 onClick={() => setActiveTab(tab)}
                             >
                                 {tab} Users : {userData[tab].length}
@@ -293,55 +390,90 @@ const Dashboard = () => {
                         <table className="text-start custom-table w-100">
                             <thead className="text-nowrap">
                                 <tr>
-                                    <th style={{ width: "150px" }}>Name</th>
-                                    <th>E-mail ID</th>
-                                    <th style={{ width: "150px" }}>Status</th>
+                                    <th style={{ width: "30%" }}>Name</th>
+                                    <th style={{ width: "40%" }}>E-mail ID</th>
+                                    <th style={{ width: "30%" }}>Status</th>
                                 </tr>
                             </thead>
                             <tbody className="text-nowrap">
-                                {userData[activeTab].map((user, index) => (
-                                    <tr key={index}>
-                                        <td>{user.name}</td>
-                                        <td>{user.email}</td>
-                                        <td style={{ padding: "10px 0" }}>
-                                            <div className="dropdown">
-                                                <button
-                                                    className="btn dropdown-toggle status-dropdown rounded-0"
-                                                    type="button"
-                                                    id={`dropdownMenuButton${index}`}
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                    style={{
-                                                        backgroundColor: statusBgColors[selectedStatus[index] || user.status],
-                                                        color: statusTextColors[selectedStatus[index] || user.status],
-                                                    }}
-                                                >
-                                                    {selectedStatus[index] || user.status}
-                                                </button>
-                                                <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton${index}`}>
-                                                    {statusOptions.map((option) => (
-                                                        <li key={option.value}>
-                                                            <button
-                                                                className="dropdown-item"
-                                                                onClick={() => handleStatusChange(index, option.value)}
-                                                                style={{ color: option.color }}
-                                                            >
-                                                                {option.label}
-                                                            </button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
+                                {userData[activeTab].length > 0 ? (
+                                    userData[activeTab].map((user, index) => (
+                                        <tr key={index}>
+                                            <td className="description-column">{user.firstname + " " + user.lastname}</td>
+                                            <td className="description-column">{user.email}</td>
+                                            <td style={{ padding: "10px 0" }}>
+                                                <div className="dropdown">
+                                                    <button
+                                                        className="btn dropdown-toggle status-dropdown rounded-0"
+                                                        type="button"
+                                                        id={`dropdownMenuButton${index}`}
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                        style={{
+                                                            backgroundColor:
+                                                                statusBgColors[
+                                                                selectedStatus[index] || user?.lock_user_permission?.status
+                                                                ],
+                                                            color:
+                                                                statusTextColors[
+                                                                selectedStatus[index] || user?.lock_user_permission?.status
+                                                                ],
+                                                        }}
+                                                    >
+                                                        {(
+                                                            selectedStatus[index] ||
+                                                            user?.lock_user_permission?.status
+                                                        )
+                                                            ?.charAt(0)
+                                                            .toUpperCase() +
+                                                            (
+                                                                selectedStatus[index] ||
+                                                                user?.lock_user_permission?.status
+                                                            )?.slice(1)}
+                                                    </button>
+                                                    <ul
+                                                        className="dropdown-menu"
+                                                        aria-labelledby={`dropdownMenuButton${index}`}
+                                                    >
+                                                        {statusOptions.map((option) => (
+                                                            <li key={option.value}>
+                                                                <button
+                                                                    className="dropdown-item"
+                                                                    onClick={() =>
+                                                                        handleStatusChange(
+                                                                            user.lock_user_permission?.id,
+                                                                            option.value,
+                                                                            index
+                                                                        )
+                                                                    }
+                                                                    style={{ color: option.color }}
+                                                                >
+                                                                    {option.label}
+                                                                </button>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="3" className="text-center py-3">
+                                            No {activeTab.toLowerCase()} users
                                         </td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div >
+            </div>
 
-            <div className="d-flex flex-column flex-xl-row my-4" style={{ gap: "2.2rem" }} >
+            <div
+                className="d-flex flex-column flex-xl-row my-4"
+                style={{ gap: "2.2rem" }}
+            >
                 <div
                     className="card card-shadow p-3 wallet-card"
                     style={{ height: "242px", width: "378px" }}
@@ -354,8 +486,8 @@ const Dashboard = () => {
                         style={{ height: "150px" }}
                     >
                         <span className="text-red text-24">
-                            <Wallet size={18} color="#c72030" /> <span className="fw-semibold text-red">15000</span>{" "}
-                            INR
+                            <Wallet size={18} color="#c72030" />{" "}
+                            <span className="fw-semibold text-red">{wallet.available_amount}</span> INR
                         </span>
                         <span className="fw-medium text-20">Available Balance</span>
                     </div>
@@ -375,7 +507,7 @@ const Dashboard = () => {
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
                             <span className="text-red text-24">
-                                <span className="fw-semibold text-red"> - 6000</span> INR
+                                <span className="fw-semibold text-red"> - {wallet.debited_amount}</span> INR
                             </span>
                             <span className="fw-medium text-20">Booked Amount</span>
                         </div>
@@ -384,7 +516,7 @@ const Dashboard = () => {
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
                             <span className="text-success text-24">
-                                <span className="fw-semibold text-success"> + 15000</span> INR
+                                <span className="fw-semibold text-success"> + {wallet.credited_amount}</span> INR
                             </span>
                             <span className="fw-medium text-20">Refund Amount</span>
                         </div>
@@ -393,8 +525,8 @@ const Dashboard = () => {
                             style={{ height: "150px", padding: "33px 0 33px 46px" }}
                         >
                             <span className="text-secondary2 text-24 d-flex align-items-center gap-2">
-                                <img src="/pending-refund-amount.svg" alt="" /> <span className="fw-semibold text-secondary2">15000</span>{" "}
-                                INR
+                                <img src="/pending-refund-amount.svg" alt="" />{" "}
+                                <span className="fw-semibold text-secondary2">15000</span> INR
                             </span>
                             <span className="fw-medium text-20">Pending Refund Amount</span>
                         </div>
