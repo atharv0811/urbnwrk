@@ -210,7 +210,7 @@ const Tickets = () => {
             </div>
 
             {
-                pagination.total_pages > 1 && (
+                totalPages > 1 && (
                     <div className="d-flex justify-content-between align-items-center px-3 mt-3">
                         <ul className="pagination justify-content-center d-flex">
                             {/* First Button */}
